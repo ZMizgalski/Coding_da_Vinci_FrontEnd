@@ -1,0 +1,9 @@
+<nav>
+  <div class="items">
+    <div class="item" *ngFor="let item of this.items">
+      <i *ngIf="item.leftIcon" class="item__icon-left pi" [ngClass]="item.leftIcon"></i>
+      <a class="item__name" [routerLink]="item.routerLink ? item.routerLink : ''">{{item.name}}</a>
+      <i *ngIf="item.rightIcon" class="item__right-icon pi" [ngClass]="item.rightIcon"></i>
+    </div>
+  </div>
+</nav>

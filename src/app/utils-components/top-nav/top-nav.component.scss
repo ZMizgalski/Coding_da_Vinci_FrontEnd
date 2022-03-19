@@ -1,0 +1,29 @@
+@import "../../../styling/all.scss";
+
+:host{
+  @include flex-container;
+  background-color: $surface-1;
+}
+
+.items{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 0 15px 0;
+  margin-top: 5px;
+  cursor: pointer;
+
+  &__name{
+    color: white;
+    text-decoration: none;
+    text-align:  center;
+    width: 100%;
+  }
+}

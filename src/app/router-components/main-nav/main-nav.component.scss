@@ -1,0 +1,15 @@
+@import "../../../styling/all.scss";
+
+:host{
+  @include flex-container;
+  flex-direction: row;
+  justify-content: stretch;
+}
+
+.nav{
+  flex: 1;
+}
+
+.router{
+  flex: 4
+}
