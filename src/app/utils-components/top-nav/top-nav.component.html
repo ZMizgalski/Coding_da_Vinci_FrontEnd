@@ -1,10 +1,10 @@
-<nav>
-  <div class="items">
+<div class="container">
+  <nav class="items">
     <a class="item" *ngFor="let item of this.items" [routerLink]="item.routerLink ? item.routerLink : ''">
       <i *ngIf="item.leftIcon" class="item__icon-left pi" [ngClass]="item.leftIcon"></i>
       <p class="item__name">{{item.name}}</p>
       <i *ngIf="item.rightIcon" class="item__right-icon pi" [ngClass]="item.rightIcon"></i>
     </a>
-  </div>
-</nav>
-<img class="logo" src="../../../assets/images/Abstract Visioner_tr.png">
+  </nav>
+  <img class="logo" src="../../../assets/images/Abstract Visioner_tr.png">
+</div>

@@ -4,6 +4,17 @@
   @include flex-container;
   background-color: $surface-1;
   padding: 20px;
+  position: relative;
+}
+
+.container{
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  flex-direction: column;
+  width: inherit;
 }
 
 .items{
@@ -15,7 +26,8 @@
 .logo{
   width: 100%;
   margin-top: auto;
-  margin-bottom: -10%;
+  // align-items: flex-end;
+  // margin-bottom: -10%;
 }
 
 .item{
@@ -32,7 +44,7 @@
   font-size: 20px;
 
   &:first-child{
-    margin-top: 0;
+    margin-top: 20px;
   }
 
   &:hover .item__name::before{

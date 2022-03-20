@@ -17,3 +17,6 @@ export interface ImageResponseModel{
     data: string;
   }]
 }
+
+export const EVENT_WHEN = "... When";
+export const EVENT_WHERE = "... Where";
