@@ -2,26 +2,85 @@
 
 :host{
   display: flex;
+  width: 100%;
+  min-height: 100vh;
   flex-direction: column;
   flex: 1;
 }
-
-.content{
+.home-main-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
   flex-direction: column;
+  background-image: url("../../../assets/images/home-image2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-clip: content-box;
+  opacity: 1;
 
-  &__row{
+  &-overlay {
+    width: 100%;
     display: flex;
-    flex-direction: row;
+    background-color: #000;
+    justify-content: center;
+    opacity: 0.4;
     align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
-  &__text{
-    text-align: justify;
-    line-height: 1.5em;
+  &-data-con {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    position: fixed;
   }
 
-  &__image{
-    margin: 15px;
+  &-header {
+    letter-spacing: 5px;
+    color: white;
+    font-size: 35px;
+    font-weight: 600;
+  }
+
+  &__button {
+    width: 150px;
+    height: 50px;
+    padding: 10px 25px;
+    border: 2px solid white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+  }
+  
+  &__button:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+     background: #e0e5ec;
+    transition: all 0.3s ease;
+  }
+  &__button:hover {
+    color: #000;
+  }
+  &__button:hover:after {
+    top: 0;
+    height: 100%;
+  }
+  &__button:active {
+    top: 2px;
   }
 }
