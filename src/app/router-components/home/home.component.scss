@@ -20,6 +20,14 @@
   background-clip: content-box;
   opacity: 1;
 
+  &__img {
+    width: 20%;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    position: fixed;
+  }
+
   &-overlay {
     width: 100%;
     display: flex;
