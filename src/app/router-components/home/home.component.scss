@@ -1,0 +1,27 @@
+@import "../../../styling/all.scss";
+
+:host{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+
+  &__row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__text{
+    text-align: justify;
+    line-height: 1.5em;
+  }
+
+  &__image{
+    margin: 15px;
+  }
+}

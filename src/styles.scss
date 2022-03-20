@@ -12,3 +12,12 @@ body {
   // background-size: cover;
   // background-repeat: no-repeat;
 }
+
+p{
+  margin: 0;
+}
+
+*{
+  box-sizing: border-box;
+  font-family: $font;
+}

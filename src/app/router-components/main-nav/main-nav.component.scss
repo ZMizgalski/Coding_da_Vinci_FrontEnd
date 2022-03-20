@@ -3,13 +3,13 @@
 :host{
   @include flex-container;
   flex-direction: row;
-  justify-content: stretch;
 }
 
 .nav{
-  flex: 1;
+  width: 200px;
+  flex: unset;
 }
 
 .router{
-  flex: 4
+  @include flex-container;
 }
