@@ -1,1 +1,9 @@
-<p>collection works!</p>
+<div class="container">
+  <div class="model" *ngFor="let model of this.data; let i = index; trackBy: this.trackByTitle"
+  [ngClass]="{'model--standard': !this.imagesModes[i], 'model--panoramic': this.imagesModes[i]}">
+    <div class="model__image-wrapper">
+      <img #image (load)="this.calcIsPanoramic(image, i)" class="model__image" loading="lazy" [src]="model.mainImage">
+    </div>
+    <p class="title">{{model.mainTitle}}</p>
+  </div>
+</div>

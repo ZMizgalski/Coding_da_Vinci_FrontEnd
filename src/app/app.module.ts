@@ -11,7 +11,7 @@ import { AboutComponent } from './router-components/about/about.component';
 import { MixerComponent } from './router-components/mixer/mixer.component';
 import { NotFoundComponent } from './router-components/not-found/not-found.component';
 import { ImageBrowserComponent } from './utils-components/image-browser/image-browser.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
