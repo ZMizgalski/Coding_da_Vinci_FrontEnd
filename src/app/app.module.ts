@@ -12,10 +12,12 @@ import { MixerComponent } from './router-components/mixer/mixer.component';
 import { NotFoundComponent } from './router-components/not-found/not-found.component';
 import { ImageBrowserComponent } from './utils-components/image-browser/image-browser.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ResizeDirective } from './services/resize-handler/resize.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ResizeDirective,
     MainNavComponent,
     TopNavComponent,
     HomeComponent,
@@ -30,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ResizeDirective],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
