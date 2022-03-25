@@ -1,7 +1,9 @@
-import { DirectiveSize } from './services/resize-handler/interfaces/directive-size.interface';
 import { ResizeService } from './services/resize-handler/resize.service';
 import { Component } from '@angular/core';
 import { ResizeEvent } from './services/resize-handler/resize.event';
+import { ScreenSubscription } from './services/resize-handler/interfaces/screen-subsccription.interface';
+import { Subscription } from 'rxjs';
+import { SizeEnum } from './services/resize-handler/interfaces/size.enum';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +16,21 @@ import { ResizeEvent } from './services/resize-handler/resize.event';
   `]
 })
 export class AppComponent {
+  
+  private subscription: Subscription | undefined;
 
   constructor(public resizeService: ResizeService) {}
 
   public onResize(event: ResizeEvent) {
-    const newSize: DirectiveSize = {width: event.newRect.width, height: event.newRect.height};
-    console.log(this.resizeService.thinkAboutSize(newSize));
+     this.resizeService.getSize(event.newRect.width, event.newRect.height);
+  }
 
+  ngOnInit(): void {
+    const screenSubscription: ScreenSubscription = this.resizeService.subscribeToScreenResize();
+    this.subscription = screenSubscription.subscription;
+  }
+
+  ngOnDestroy(): void {
+    this.resizeService.unSubscribeToScreenResize(this.subscription);
   }
 }

@@ -1,4 +1,4 @@
-<app-top-nav style="display: none;" [items] = "this.navItems" class="nav"></app-top-nav>
-<div  class="router">
+<app-top-nav [ngStyle]="{'background-color': resizeService.mode == 0 ? 'red' : (resizeService.mode == 2 ? 'orange' : 'blue') }" [items] = "this.navItems" class="nav"></app-top-nav>
+<div class="router">
   <router-outlet></router-outlet>
 </div>
