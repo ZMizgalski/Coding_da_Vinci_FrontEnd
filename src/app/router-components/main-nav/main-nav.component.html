@@ -1,4 +1,4 @@
-<app-top-nav *ngIf="!(resizeService.mode == 0 || resizeService.mode == 2 || resizeService.mode == 1)" [items] = "this.navItems" class="nav"></app-top-nav>
+<app-top-nav [items] = "this.navItems" class="nav"></app-top-nav>
 <div class="router">
   <router-outlet></router-outlet>
 </div>

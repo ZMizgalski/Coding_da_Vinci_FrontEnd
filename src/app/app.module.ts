@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './router-components/main-nav/main-nav.component';
-import { TopNavComponent } from './utils-components/top-nav/top-nav.component';
+import { SideNavComponent } from './utils-components/side-nav/side-nav.component';
 import { HomeComponent } from './router-components/home/home.component';
 import { CollectionComponent } from './router-components/collection/collection.component';
 import { AboutComponent } from './router-components/about/about.component';
@@ -13,13 +13,14 @@ import { NotFoundComponent } from './router-components/not-found/not-found.compo
 import { ImageBrowserComponent } from './utils-components/image-browser/image-browser.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ResizeDirective } from './services/resize-handler/resize.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResizeDirective,
     MainNavComponent,
-    TopNavComponent,
+    SideNavComponent,
     HomeComponent,
     CollectionComponent,
     AboutComponent,
@@ -30,7 +31,8 @@ import { ResizeDirective } from './services/resize-handler/resize.directive';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [ResizeDirective],
   bootstrap: [AppComponent]

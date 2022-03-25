@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="toggler" *ngIf="this.togglerVisible">
+    <i class="pi" [ngClass]="{'pi-times': this.navExpanded, 'pi-align-justify': !this.navExpanded}" (click) = "this.toggleNavExpansion()"></i>
+  </div>
+  <div class="navigation" *ngIf="this.navExpanded" @transitionHidding>
+    <nav class="navigation__items">
+      <a class="navigation__item" *ngFor="let item of this.items" [routerLink]="item.routerLink ? item.routerLink : ''">
+        <i *ngIf="item.leftIcon" class="item__icon-left pi" [ngClass]="item.leftIcon"></i>
+        <p class="navigation__item-name">{{item.name}}</p>
+        <i *ngIf="item.rightIcon" class="item__right-icon pi" [ngClass]="item.rightIcon"></i>
+      </a>
+    </nav>
+    <img class="navigation__logo" src="../../../assets/images/Abstract Visioner_tr.png">
+  </div>
+</div>

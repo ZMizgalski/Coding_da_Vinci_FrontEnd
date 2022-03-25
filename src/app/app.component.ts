@@ -1,8 +1,6 @@
 import { ResizeService } from './services/resize-handler/resize.service';
 import { Component } from '@angular/core';
 import { ResizeEvent } from './services/resize-handler/resize.event';
-import { ScreenSubscription } from './services/resize-handler/interfaces/screen-subsccription.interface';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,21 +13,10 @@ import { Subscription } from 'rxjs';
   `]
 })
 export class AppComponent {
-  
-  private subscription: Subscription | undefined;
 
   constructor(public resizeService: ResizeService) {}
 
   public onResize(event: ResizeEvent) {
-     this.resizeService.getSize(event.newRect.width, event.newRect.height);
-  }
-
-  ngOnInit(): void {
-    const screenSubscription: ScreenSubscription = this.resizeService.subscribeToScreenResize();
-    this.subscription = screenSubscription.subscription;
-  }
-
-  ngOnDestroy(): void {
-    this.resizeService.unSubscribeToScreenResize(this.subscription);
+     this.resizeService.setSize(event.newRect.width, event.newRect.height);
   }
 }

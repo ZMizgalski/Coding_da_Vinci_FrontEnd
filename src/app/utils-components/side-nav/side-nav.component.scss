@@ -1,0 +1,116 @@
+@import "../../../styling/all.scss";
+
+:host{
+  @include flex-container;
+  background-color: $surface-1;
+  // padding: 20px;
+  position: relative;
+  max-width: 200px;
+}
+
+.container{
+  position: sticky;
+  top: 0;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  flex-direction: row-reverse;
+  width: inherit;
+}
+
+.toggler{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+
+  & .pi{
+    cursor: pointer;
+    padding: 7px;
+    font-size: 22px;
+    border-radius: 50%;
+    transition-duration: 150ms;
+    margin-top: 5%;
+
+    &:hover{
+      background-color: rgba(white, 0.2);
+    }
+
+    &-align-justify{
+      transform: scale(1.2);
+      margin-top: 20%;
+    }
+  }
+
+  &__logo{
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.navigation{
+
+  display: flex;
+  flex-direction: column;
+
+  &__items{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__logo{
+    width: 100%;
+    margin-top: auto;
+    // align-items: flex-end;
+    // margin-bottom: -10%;
+  }
+
+  &__item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 0 15px 0;
+    cursor: pointer;
+    justify-content: center;
+    text-decoration: none;
+    text-align:  center;
+    margin-top: 10px;
+    font-size: 20px;
+  
+    &:first-child{
+      margin-top: 20px;
+    }
+  
+    &:hover .navigation__item-name::before{
+      width: 100%;
+      left: 0;
+    }
+  
+    &-name{
+      color: white;
+      // width: 100%;
+      position: relative;
+      padding: 0 0.2em 0 0.2em;
+  
+      &::before{
+        content: '';
+        position: absolute;
+        transition-duration: 200ms;
+        height: 0.05em;
+        width: 0;
+        bottom: -10%;
+        left: 50%;
+        background-color: white;
+        transition-duration: 200ms;
+      } 
+    }
+  }
+}
+
+
+
+
+

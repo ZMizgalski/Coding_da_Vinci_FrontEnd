@@ -1,9 +1,8 @@
-import { ScreenSubscription } from './interfaces/screen-subsccription.interface';
 import { DirectiveSize } from './interfaces/directive-size.interface';
 import { Injectable } from "@angular/core";
 import { ScreenSize } from "./interfaces/screen-size.interface";
 import { SizeEnum } from './interfaces/size.enum';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -11,30 +10,25 @@ import { Subject, Subscription } from 'rxjs';
 })
 export class ResizeService {
 
+    
+    private appMode: BehaviorSubject<SizeEnum> = new BehaviorSubject<SizeEnum>(0);
 
-    public mode: SizeEnum = 0;
-    private appMode: Subject<SizeEnum> = new Subject<SizeEnum>();
+    public get modeChanges(): Observable<SizeEnum>{
+      return this.appMode;
+    }
+    
+    public get mode(): SizeEnum{
+      return this.appMode.value;
+    }
 
     private thinkAboutSize(size: DirectiveSize): ScreenSize | undefined {
         return this.sizes.filter(item => item.size.minWidth <= size.width && (item.size.maxWidth >= size.width || item.size.maxWidth == -1))[0];
     }
 
-    public subscribeToScreenResize(): ScreenSubscription {
-        const subscription = this.appMode.subscribe(value => {
-            this.mode = value;
-          });
-        return {subscription: subscription, screenSize: this.mode}
-    }
-
-    public unSubscribeToScreenResize(subscription: Subscription | undefined): void {
-        if (subscription)
-        subscription.unsubscribe();
-    }
-
-    public getSize(width: number, height: number): void {
+    public setSize(width: number, height: number): void {
         const newSize: DirectiveSize = {width: width, height: height};
         const size = this.thinkAboutSize(newSize);
-        size ? this.appMode.next(size.name) : this.appMode.next(SizeEnum.TINY);
+        size ? this.setNewMode(size.name) : this.setNewMode(SizeEnum.TINY);
     }
 
     private sizes: ScreenSize[] = [
@@ -43,5 +37,9 @@ export class ResizeService {
       {name: SizeEnum.MEDIUM, size: {minWidth:500, maxWidth: 900}},
       {name: SizeEnum.LARGE, size: {minWidth:900, maxWidth: -1}}
     ]
+
+    public setNewMode(value: SizeEnum){
+      this.appMode.next(value);
+    }
 
 }
