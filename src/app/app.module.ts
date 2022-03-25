@@ -25,7 +25,7 @@ import { ResizeDirective } from './services/resize-handler/resize.directive';
     AboutComponent,
     MixerComponent,
     NotFoundComponent,
-    ImageBrowserComponent
+    ImageBrowserComponent,
   ],
   imports: [
     BrowserModule,

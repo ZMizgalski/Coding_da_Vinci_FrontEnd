@@ -18,7 +18,7 @@ export class TopNavComponent implements OnInit {
 
   items: NavItemModel[] = [];
 
-  @Input("items")
+  @Input('items')
   public set itemsInput(items: NavItemModel[]){
     this.items = items;
     this.cd.markForCheck();
@@ -28,6 +28,7 @@ export class TopNavComponent implements OnInit {
   }
 
   constructor(private cd: ChangeDetectorRef, private router: Router) { }
+
 
   ngOnInit(): void {
 
