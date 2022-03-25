@@ -1,0 +1,135 @@
+@import "../../../styling/all.scss";
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+
+    &-team-description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-direction: column;
+
+        &-item {
+            display: flex;
+            width: 100%;
+            padding: 20px;
+            background: $surface-2;
+            justify-content: space-around;
+            align-items: center;
+
+            &__img {
+                max-width: 40%;
+            }
+
+            &-text-con {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                &__header {
+                    font-size: 40px;
+                }
+
+                &__content {
+                    font-size: 20px;
+    
+                }
+            }
+        }
+
+        &-item-mobile {
+            display: flex;
+            width: 100%;
+            background: $surface-2;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+
+            .container-team-description-item__img {
+                max-width: 40%;
+            }
+
+            .container-team-description-item-text-con {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                &__header {
+                    font-size: 40px;
+                }
+
+                &__content {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    &-header {
+        display: flex;
+        font-size: 30px;
+        min-height: 10vh;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &__p {
+            color: white;
+        }
+
+    }
+
+    &-description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        &__img {
+            width: 50%;
+        }
+
+        &-text-con {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            &__text {
+
+            }
+        }
+
+    }
+
+
+    &-description-img-mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .container-description__img {
+            width: 100% !important;
+        }
+
+        .container-description-text-con {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100% !important;
+            &__text {
+
+            }
+        }
+
+    }
+
+}
