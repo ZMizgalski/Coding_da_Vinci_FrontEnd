@@ -4,7 +4,10 @@
   @include flex-container;
   flex-direction: row;
 }
-
+.cart {
+  max-width: 200px;
+  flex: unset;
+}
 .nav{
   max-width: 200px;
   flex: unset;

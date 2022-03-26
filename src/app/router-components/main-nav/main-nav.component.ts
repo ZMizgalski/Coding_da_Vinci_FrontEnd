@@ -8,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class MainNavComponent {
 
+
+  public visible = false;
+
   constructor() { }
 
   navItems: NavItemModel[] = [

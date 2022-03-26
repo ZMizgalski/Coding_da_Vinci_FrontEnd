@@ -14,6 +14,7 @@ import { ImageBrowserComponent } from './utils-components/image-browser/image-br
 import { HttpClientModule } from '@angular/common/http';
 import { ResizeDirective } from './services/resize-handler/resize.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MixerCartComponent } from './utils-components/mixer-cart/mixer-cart.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MixerComponent,
     NotFoundComponent,
     ImageBrowserComponent,
+    MixerCartComponent
   ],
   imports: [
     BrowserModule,

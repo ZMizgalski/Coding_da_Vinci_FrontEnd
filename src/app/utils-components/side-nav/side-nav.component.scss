@@ -4,13 +4,13 @@
   @include flex-container;
   background-color: $surface-1;
   // padding: 20px;
-  position: relative;
   max-width: 200px;
+  // position: fixed;
+  z-index: 9999;
 }
 
 .container{
   position: sticky;
-  top: 0;
   display: flex;
   top: 0;
   left: 0;
@@ -50,7 +50,7 @@
 }
 
 .navigation{
-
+  // overflow-y: scroll;
   display: flex;
   flex-direction: column;
 
