@@ -84,6 +84,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
       this.resizeService.modeChanges.subscribe(newSize=>{
         if(newSize <= SizeEnum.MEDIUM){
           this.togglerVisible = true;
+          this.navExpanded = false;
         } 
         else{
           this.navExpanded = true;

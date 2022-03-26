@@ -1,5 +1,8 @@
+import { ResizeService } from './../../services/resize-handler/resize.service';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
+import { Subscription } from 'rxjs';
+import { SizeEnum } from 'src/app/services/resize-handler/interfaces/size.enum';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +11,17 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  private subscriptions: Subscription[] = [];
+  public size: number = 0;
+
+  constructor(private resizeService: ResizeService) { }
 
   ngOnInit(): void {
-    this.dataService.getImagesData().subscribe(value=>{
-      console.log(value);
-    })
+    this.subscriptions.push(
+      this.resizeService.modeChanges.subscribe(newSize=>{
+       this.size = newSize;
+      })
+    )
   }
 
 }

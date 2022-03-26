@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="toggler" *ngIf="this.togglerVisible">
-    <i class="pi" [ngClass]="{'pi-times': this.navExpanded, 'pi-align-justify': !this.navExpanded}" (click) = "this.toggleNavExpansion()"></i>
+  <div class="toggler">
+    <i class="pi" *ngIf="this.togglerVisible" [ngClass]="{'pi-times': this.navExpanded, 'pi-align-justify': !this.navExpanded}" (click) = "this.toggleNavExpansion()"></i>
   </div>
   <div class="navigation" *ngIf="this.navExpanded" @transitionHidding>
     <nav class="navigation__items">
