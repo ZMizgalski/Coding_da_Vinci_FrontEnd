@@ -1,17 +1,20 @@
 <div class="main-container">
   <div class="top-nav">
-    <span class="top-nav__button" (click)="this.navExpand = !this.navExpand">
+    <span *ngIf="!isHeadset" class="top-nav__button" (click)="this.navExpand = !this.navExpand">
       <i class="pi pi-align-justify"> </i>
     </span>
-    <a
-      class="top-nav__link"
-      *ngFor="let item of navItems"
-      [routerLink]="item.routerLink ? item.routerLink : ''"
+    <span class="links-container" *ngIf="isHeadset">
+      <a
+        class="top-nav__link"
+        *ngFor="let item of navItems"
+        [routerLink]="item.routerLink ? item.routerLink : ''"
+      >
+        <p class="top-nav__link__p">{{item.name}}</p></a
+      ></span
     >
-      <p class="top-nav__link__p">{{item.name}}</p></a
-    >
+
     <span class="top-nav__button" (click)="this.cartExpand = !this.cartExpand">
-      <i class="pi pi-images"> </i>
+      <i class="pi pi-sliders-v"> </i>
     </span>
   </div>
   <div class="content-container">

@@ -1,14 +1,29 @@
+import { SizeEnum } from 'src/app/services/resize-handler/interfaces/size.enum';
+import { Subscription } from 'rxjs';
+import { ResizeService } from './../../services/resize-handler/resize.service';
 import { NavItemModel } from '../../utils-components/side-nav/side-nav.component';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.scss'],
 })
-export class MainNavComponent {
+export class MainNavComponent implements OnInit, OnDestroy {
   public navExpand = false;
   public cartExpand = false;
+  private subscriptions: Subscription[] = [];
+  private localIsHeadset = false;
+
+  public get isHeadset(): boolean {
+    return this.localIsHeadset;
+  }
+
+  public set isHeadset(value: boolean) {
+    this.localIsHeadset = value;
+  }
+
+  constructor(private resizeService: ResizeService) {}
 
   public navItems: NavItemModel[] = [
     {
@@ -28,4 +43,20 @@ export class MainNavComponent {
       routerLink: 'about',
     },
   ];
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(item => item.unsubscribe());
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.resizeService.modeChanges.subscribe(item => {
+        if (item <= SizeEnum.MEDIUM) {
+          this.isHeadset = false;
+        } else {
+          this.isHeadset = true;
+        }
+      })
+    );
+  }
 }
