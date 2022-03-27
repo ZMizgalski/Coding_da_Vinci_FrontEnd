@@ -37,7 +37,7 @@ export class CollectionComponent implements OnInit {
   }
 
   public getCreateDate(item: ImageResponseModel): string {
-    const result = item.events.filter(item => item.header === EVENT_WHEN);
+    const result = item.events.filter(tmpItem => tmpItem.header === EVENT_WHEN);
     if (result.length === 0) {
       return '';
     }

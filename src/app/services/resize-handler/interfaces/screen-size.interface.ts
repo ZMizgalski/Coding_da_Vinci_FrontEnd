@@ -1,7 +1,7 @@
-import { SizeCompartment } from "./size-compartment.interface";
-import { SizeEnum } from "./size.enum";
+import { SizeCompartment } from './size-compartment.interface';
+import { SizeEnum } from './size.enum';
 
 export interface ScreenSize {
-    name: SizeEnum;
-    size: SizeCompartment;
+  name: SizeEnum;
+  size: SizeCompartment;
 }

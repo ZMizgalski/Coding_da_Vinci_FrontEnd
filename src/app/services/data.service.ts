@@ -5,15 +5,14 @@ import { Observable } from 'rxjs';
 import { API_URL } from '../models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
-  private readonly URL = `${API_URL}`
+  private readonly URL = `${API_URL}`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  public getImagesData():Observable<ImageResponseModel[]>{
+  public getImagesData(): Observable<ImageResponseModel[]> {
     return this.http.get<ImageResponseModel[]>(`${API_URL}/getData`);
   }
-
 }

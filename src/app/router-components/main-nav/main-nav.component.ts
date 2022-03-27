@@ -10,8 +10,6 @@ export class MainNavComponent {
   public navExpand = false;
   public cartExpand = false;
 
-  constructor() {}
-
   public navItems: NavItemModel[] = [
     {
       name: 'Home',

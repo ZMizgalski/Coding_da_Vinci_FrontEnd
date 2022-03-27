@@ -1,4 +1,4 @@
 export interface SizeCompartment {
-    maxWidth: number;
-    minWidth: number;
+  maxWidth: number;
+  minWidth: number;
 }

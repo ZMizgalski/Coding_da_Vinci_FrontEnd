@@ -6,7 +6,6 @@
    'model--panoramic': this.imagesModes[i]===this.PANORAMIC,
     'model--ultra-panoramic': this.imagesModes[i]===this.ULTRA_PANORAMIC}"
   >
-    <!-- <div class="model__image-wrapper"> -->
     <img
       #image
       (load)="this.calcIsPanoramic(image, i)"
@@ -14,7 +13,6 @@
       loading="lazy"
       [src]="model.mainImage"
     />
-    <!-- </div> -->
     <p class="model__title">
       "{{model.mainTitle}}"
       <span class="model__date">{{this.getCreateDate(model)}}</span>

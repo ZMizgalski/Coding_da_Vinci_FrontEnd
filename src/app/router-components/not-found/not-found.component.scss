@@ -1,69 +1,69 @@
 .not-found-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+
+  &__button {
+    width: 150px;
+    height: 50px;
+    padding: 10px 25px;
+    border: 2px solid white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+  }
+
+  &__button:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: #e0e5ec;
+    transition: all 0.3s ease;
+  }
+  &__button:hover {
+    color: #000;
+  }
+  &__button:hover:after {
+    top: 0;
+    height: 100%;
+  }
+  &__button:active {
+    top: 2px;
+  }
+
+  .data-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    height: 100vh;
-
-    &__button {
-        width: 150px;
-        height: 50px;
-        padding: 10px 25px;
-        border: 2px solid white;
-        font-family: 'Lato', sans-serif;
-        font-weight: 600;
-        font-size: 15px;
-        color: white;
-        background: transparent;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        display: inline-block;
+    padding: 20px;
+    &__p {
+      text-align: center;
+      color: white;
+      margin: 0;
+      padding: 0;
+      font-weight: 800;
+      letter-spacing: 5px;
+      font-size: 200px;
     }
-
-    &__button:after {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -1;
-         background: #e0e5ec;
-        transition: all 0.3s ease;
-      }
-      &__button:hover {
-        color: #000;
-      }
-      &__button:hover:after {
-        top: 0;
-        height: 100%;
-      }
-      &__button:active {
-        top: 2px;
-      }
-
-    .data-container {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        &__p {
-            text-align: center;
-            color: white;
-            margin: 0;
-            padding: 0;
-            font-weight: 800;
-            letter-spacing: 5px;
-            font-size: 200px;
-        }
-        &__h3 {
-            text-align: center;
-            color: white;
-            font-size: 25px;
-            margin-top: 0;
-        }
+    &__h3 {
+      text-align: center;
+      color: white;
+      font-size: 25px;
+      margin-top: 0;
     }
+  }
 }

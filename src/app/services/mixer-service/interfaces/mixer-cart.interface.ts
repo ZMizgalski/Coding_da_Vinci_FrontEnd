@@ -1,4 +1,4 @@
 export interface MixerCart {
-    img: string;
-    name: string;
+  img: string;
+  name: string;
 }

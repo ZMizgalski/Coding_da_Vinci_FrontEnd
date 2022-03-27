@@ -1,8 +1,6 @@
 import { ResizeService } from './../../services/resize-handler/resize.service';
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { Subscription } from 'rxjs';
-import { SizeEnum } from 'src/app/services/resize-handler/interfaces/size.enum';
 
 @Component({
   selector: 'app-home',

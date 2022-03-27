@@ -1,40 +1,44 @@
 <div class="container">
-    <div class="container-header">
-        <p class="container-header__p">
-            Abstract Visioner Team
-        </p>
+  <div class="container-header">
+    <p class="container-header__p">Abstract Visioner Team</p>
+  </div>
+  <div class="container-team-description">
+    <div
+      class="container-team-description-item"
+      [ngClass]="{'container-team-description-item-mobile': resizeService.mode != 3}"
+    >
+      <img
+        class="container-team-description-item__img"
+        src="../../../assets/icons/person_white.png"
+      />
+      <div class="container-team-description-item-text-con">
+        <p class="container-team-description-item-text-con__header">ZM</p>
+        <p class="container-team-description-item-text-con__content">sasasasasasasasas</p>
+      </div>
     </div>
-    <div class="container-team-description">
-        <div class="container-team-description-item" [ngClass]="{'container-team-description-item-mobile': resizeService.mode != 3}">
-            <img class="container-team-description-item__img" src="../../../assets/icons/person_white.png">
-            <div class="container-team-description-item-text-con">
-                <p class="container-team-description-item-text-con__header">
-                    ZM
-                </p>
-                <p class="container-team-description-item-text-con__content">
-                    sasasasasasasasas
-                </p>
-            </div>
-        </div>
-        <div class="container-team-description-item" [ngClass]="{'container-team-description-item-mobile': resizeService.mode != 3}">
-            <img class="container-team-description-item__img" src="../../../assets/icons/person_white.png">
-            <div class="container-team-description-item-text-con">
-                <p class="container-team-description-item-text-con__header">
-                    ZM
-                </p>
-                <p class="container-team-description-item-text-con__content">
-                    sasasasasasasasas
-                </p>
-            </div>
-        </div>
+    <div
+      class="container-team-description-item"
+      [ngClass]="{'container-team-description-item-mobile': resizeService.mode != 3}"
+    >
+      <img
+        class="container-team-description-item__img"
+        src="../../../assets/icons/person_white.png"
+      />
+      <div class="container-team-description-item-text-con">
+        <p class="container-team-description-item-text-con__header">ZM</p>
+        <p class="container-team-description-item-text-con__content">sasasasasasasasas</p>
+      </div>
     </div>
-    <div *ngFor="let item of data; let i = index" [ngStyle]="{'flex-direction': i % 2 == 1 && !( resizeService.mode == 0 || resizeService.mode == 1 ||  resizeService.mode == 2) ? 'row-reverse' : ''}"  [ngClass]="{'container-description-img-mobile': resizeService.mode != 3}" class="container-description">
-        <img [src]="item.img" class="container-description__img">
-        <div class="container-description-text-con">
-            <p class="container-description-text-con__text">
-                {{item.description}}
-            </p>
-        </div>
+  </div>
+  <div
+    *ngFor="let item of data; let i = index"
+    [ngStyle]="{'flex-direction': i % 2 == 1 && !( resizeService.mode <= 2) ? 'row-reverse' : ''}"
+    [ngClass]="{'container-description-img-mobile': resizeService.mode != 3}"
+    class="container-description"
+  >
+    <img [src]="item.img" class="container-description__img" />
+    <div class="container-description-text-con">
+      <p class="container-description-text-con__text">{{item.description}}</p>
     </div>
+  </div>
 </div>
-
