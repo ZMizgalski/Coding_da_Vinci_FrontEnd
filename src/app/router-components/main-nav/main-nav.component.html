@@ -1,8 +1,18 @@
 <div class="main-container">
   <div class="top-nav">
-    <a *ngFor="let item of navItems" [routerLink]="item.routerLink ? item.routerLink : ''"></a>
-    <button (click)="this.cartExpand = !this.cartExpand">Open Nav</button>
-    <button (click)="this.navExpand = !this.navExpand">Open Cart</button>
+    <span class="top-nav__button" (click)="this.navExpand = !this.navExpand">
+      <i class="pi pi-align-justify"> </i>
+    </span>
+    <a
+      class="top-nav__link"
+      *ngFor="let item of navItems"
+      [routerLink]="item.routerLink ? item.routerLink : ''"
+    >
+      <p class="top-nav__link__p">{{item.name}}</p></a
+    >
+    <span class="top-nav__button" (click)="this.cartExpand = !this.cartExpand">
+      <i class="pi pi-images"> </i>
+    </span>
   </div>
   <div class="content-container">
     <router-outlet></router-outlet>

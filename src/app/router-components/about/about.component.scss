@@ -1,8 +1,10 @@
 @import '../../../styling/all.scss';
 
 :host {
-  display: flex;
   flex: 1;
+  flex-grow: 1;
+  flex-basis: 0;
+  overflow-y: scroll;
 }
 .container {
   display: flex;

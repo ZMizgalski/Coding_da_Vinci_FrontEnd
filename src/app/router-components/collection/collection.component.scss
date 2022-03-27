@@ -1,5 +1,11 @@
 @import '../../../styling/all.scss';
 
+:host {
+  flex-grow: 1;
+  flex-basis: 0;
+  overflow-y: scroll;
+}
+
 .container {
   width: 100%;
   flex-direction: row;
