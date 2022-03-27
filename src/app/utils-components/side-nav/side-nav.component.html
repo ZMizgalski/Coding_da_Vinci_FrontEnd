@@ -1,15 +1,38 @@
-<div class="container">
-  <div class="toggler">
-    <i class="pi" *ngIf="this.togglerVisible" [ngClass]="{'pi-times': this.navExpanded, 'pi-align-justify': !this.navExpanded}" (click) = "this.toggleNavExpansion()"></i>
-  </div>
-  <div class="navigation" *ngIf="this.navExpanded" @transitionHidding>
+<div
+  class="side-nav-container"
+  #sideNavContainer
+  *ngIf="this.expandNav"
+  [@panelState]="{
+  value: 'visible',
+  params: {
+    transform: 'translate3d(-100%, 0px, 0px)',
+    transition: '150ms cubic-bezier(0, 0, 0.2, 1)'
+  }
+}"
+  (@panelState.start)="onAnimationStart($event)"
+  (@panelState.done)="onAnimationEnd($event)"
+>
+  <div class="navigation">
+    <span class="navigation__button">
+      <i
+        class="pi"
+        [ngClass]="{'pi-times': this.expandNav, 'pi-align-justify': !this.expandNav}"
+        (click)="toggleNavExpansion($event)"
+        (keydown.enter)="toggleNavExpansion($event)"
+      ></i
+    ></span>
+
     <nav class="navigation__items">
-      <a class="navigation__item" *ngFor="let item of this.items" [routerLink]="item.routerLink ? item.routerLink : ''">
+      <a
+        class="navigation__item"
+        *ngFor="let item of this.items"
+        [routerLink]="item.routerLink ? item.routerLink : ''"
+      >
         <i *ngIf="item.leftIcon" class="item__icon-left pi" [ngClass]="item.leftIcon"></i>
         <p class="navigation__item-name">{{item.name}}</p>
         <i *ngIf="item.rightIcon" class="item__right-icon pi" [ngClass]="item.rightIcon"></i>
       </a>
     </nav>
-    <img class="navigation__logo" src="../../../assets/images/Abstract Visioner_tr.png">
+    <img class="navigation__logo" src="../../../assets/images/Abstract Visioner_tr.png" />
   </div>
 </div>

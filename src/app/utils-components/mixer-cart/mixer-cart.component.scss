@@ -1,65 +1,77 @@
-@import "../../../styling/all.scss";
+@import '../../../styling/all.scss';
 
 :host {
-    z-index: 9999;
+  z-index: 9999;
 }
 
 .cart-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: $surface-1;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 200px;
+  z-index: 9999;
+
+  &-header {
     display: flex;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: $surface-1;
-    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+
+    & .pi {
+      cursor: pointer;
+      padding: 7px;
+      font-size: 22px;
+      border-radius: 50%;
+      transition-duration: 150ms;
+      margin-top: 5%;
+
+      &:hover {
+        background-color: rgba(white, 0.2);
+      }
+    }
+  }
+
+  &-content {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 200px;
-    z-index: 9999;
+    margin-top: auto;
+    min-height: calc(100vh - 50px);
 
-    &-header {
+    &__button {
+      margin-top: auto !important;
+      padding: 10px;
+      margin: 25px;
+    }
+
+    .content-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 10px;
+
+      &__img {
+        width: 100%;
+      }
+
+      .content-item-overlay {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 50px;
-    }
+        position: fixed;
 
-    &-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin-top: auto;
-        min-height: calc(100vh - 50px);
-
-        &__button {
-            margin-top: auto !important;
-            padding: 10px;
-            margin: 25px;
+        .overlay__p {
+          margin: 0;
         }
-
-        .content-item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 10px;
-
-            &__img {
-                width: 100%;
-
-            }
-
-            .content-item-overlay {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: fixed;
-
-                .overlay__p {
-                    margin: 0;
-                }
-            }           
-        }
+      }
     }
+  }
 }

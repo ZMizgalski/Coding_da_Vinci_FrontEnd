@@ -1,6 +1,13 @@
-<app-top-nav [items] = "this.navItems" class="nav"></app-top-nav>
-<div class="router">
-  <router-outlet></router-outlet>
+<div class="main-container">
+  <div class="top-nav">
+    <a *ngFor="let item of navItems" [routerLink]="item.routerLink ? item.routerLink : ''"></a>
+    <button (click)="this.cartExpand = !this.cartExpand">Open Nav</button>
+    <button (click)="this.navExpand = !this.navExpand">Open Cart</button>
+  </div>
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<button (click)="this.visible = true"></button>
-<app-mixer-cart [(visible)]="this.visible"></app-mixer-cart>
+
+<app-side-nav [(expandNav)]="this.navExpand" [items]="this.navItems" class="nav"></app-side-nav>
+<app-mixer-cart [(visible)]="this.cartExpand"></app-mixer-cart>

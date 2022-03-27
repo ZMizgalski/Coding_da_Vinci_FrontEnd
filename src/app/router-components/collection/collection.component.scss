@@ -1,13 +1,13 @@
-@import "../../../styling/all.scss";
+@import '../../../styling/all.scss';
 
-.container{
+.container {
   width: 100%;
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
 }
 
-.model{
+.model {
   max-height: 500px;
   padding: 10px;
   display: flex;
@@ -15,19 +15,19 @@
   position: relative;
   // border: 10px solid orange;
 
-  &--standard{
+  &--standard {
     width: 50%;
   }
 
-  &--panoramic{
+  &--panoramic {
     width: 100%;
   }
 
-  &--ultra-panoramic{
+  &--ultra-panoramic {
     width: 100%;
   }
 
-  &__image{
+  &__image {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +36,7 @@
     width: 100%;
   }
 
-  &__title{
+  &__title {
     opacity: 0;
     transition-duration: 300ms;
     font-size: 23px;
@@ -54,11 +54,11 @@
     cursor: pointer;
   }
 
-  &__date{
+  &__date {
     font-size: 20px;
   }
 
-  &:hover .model__title{
+  &:hover .model__title {
     opacity: 1;
 
     background-color: rgba(black, 0.5);

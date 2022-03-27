@@ -1,103 +1,125 @@
 import { Subscription } from 'rxjs';
 import { ResizeService } from '../../services/resize-handler/resize.service';
-import { EventEmitter, OnDestroy } from '@angular/core';
+import { EventEmitter, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Output } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SizeEnum } from 'src/app/services/resize-handler/interfaces/size.enum';
+import {
+  animate,
+  animation,
+  state,
+  style,
+  transition,
+  trigger,
+  useAnimation,
+} from '@angular/animations';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 
-export interface NavItemModel{
+export interface NavItemModel {
   name: string;
   routerLink?: string;
   rightIcon?: string;
   leftIcon?: string;
 }
 
+const showAnimation = animation([
+  style({ transform: '{{transform}}', opacity: 0 }),
+  animate('{{transition}}'),
+]);
+
+const hideAnimation = animation([
+  animate('{{transition}}', style({ transform: '{{transform}}', opacity: 0 })),
+]);
+
 @Component({
-  selector: 'app-top-nav',
+  selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   animations: [
-    trigger("transitionHidding",[
-      state("void", style({width: 0, overflow: 'hidden'})),
-      state("*", style("*")),
-      transition("void <=> *", animate("200ms ease"))
-    ])
-  ]
+    trigger('panelState', [
+      transition('void => visible', [useAnimation(showAnimation)]),
+      transition('visible => void', [useAnimation(hideAnimation)]),
+    ]),
+  ],
 })
 export class SideNavComponent implements OnInit, OnDestroy {
+  private localNavExpanded = true;
+  public itemsList: NavItemModel[] = [];
+  @Output() onShow: EventEmitter<any> = new EventEmitter();
+  @Output() onHide: EventEmitter<any> = new EventEmitter();
+  @Output() expandNavChange: EventEmitter<any> = new EventEmitter();
 
-  togglerVisible: boolean = false;
-  items: NavItemModel[] = [];
-  private subscriptions: Subscription[] = [];
+  @Input() get expandNav(): boolean {
+    return this.localNavExpanded;
+  }
+
+  public set expandNav(value: boolean) {
+    this.localNavExpanded = value;
+  }
 
   @Input('items')
-  public set itemsInput(items: NavItemModel[]){
-    this.items = items;
+  public set items(items: NavItemModel[]) {
+    this.itemsList = items;
     this.cd.markForCheck();
   }
-  public get itemsInput(): NavItemModel[]{
-    return this.items;
+
+  public get items(): NavItemModel[] {
+    return this.itemsList;
   }
 
-  private _navExpanded: boolean = true;
+  constructor(private cd: ChangeDetectorRef, public resizeService: ResizeService) {}
 
-  @Input("navExpanded")
-  public set navExpandedInput(value: boolean){
-    if(value === this._navExpanded) return;
-    this._navExpanded = value;
-    this.cd.markForCheck();
-  }
-  public get navExpandedInput(): boolean{
-    return this._navExpanded;
+  private show(): void {
+    this.onShow.emit({});
+    this.expandNavChange.emit(true);
+    this.expandNav = true;
   }
 
-  @Output()
-  public navExpandendChange: EventEmitter<boolean> = new EventEmitter();
-
-  public set navExpanded(value: boolean){
-    if(value === this._navExpanded) return;
-    this._navExpanded = value;
-    this.cd.markForCheck();
-    this.navExpandendChange.emit(value);
+  private hide(): void {
+    this.onHide.emit({});
+    this.expandNav = false;
   }
 
-  public get navExpanded(): boolean{
-    return this._navExpanded;
+  private close(): void {
+    this.hide();
+    this.expandNavChange.emit(false);
   }
 
-  public toggleNavExpansion(){
-    this.navExpanded = !this.navExpanded;
+  private open(): void {
+    this.show();
+    this.expandNavChange.emit(true);
   }
 
-  constructor(private cd: ChangeDetectorRef, private router: Router, public resizeService: ResizeService) { }
+  public toggleNavExpansion(event: any): void {
+    this.expandNav ? this.close() : this.open();
+    event.preventDefault();
+  }
+
+  onAnimationStart(event: any): void {
+    switch (event.toState) {
+      case 'visible':
+        this.show();
+        break;
+    }
+  }
+
+  onAnimationEnd(event: any): void {
+    switch (event.toState) {
+      case 'void':
+        this.hide();
+        break;
+    }
+  }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub=>sub.unsubscribe());
+    this.expandNav = false;
   }
 
-
-  ngOnInit(): void {
-    this.subscriptions.push(
-      this.resizeService.modeChanges.subscribe(newSize=>{
-        if(newSize <= SizeEnum.MEDIUM){
-          this.togglerVisible = true;
-          // this.navExpanded = false;
-        } 
-        else{
-          this.navExpanded = true;
-          this.togglerVisible = false;
-        }
-        this.cd.markForCheck();
-      })
-    )
-  }
-
-  // navigateAfterClick(item: NavItemModel){
-  //   if(!item.routerLink) return;
-  //   this.router.navigate([item.routerLink])
-  // }
-
+  ngOnInit(): void {}
 }

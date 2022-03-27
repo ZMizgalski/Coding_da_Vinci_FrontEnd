@@ -1,10 +1,8 @@
-@import "../../../styling/all.scss";
+@import '../../../styling/all.scss';
 
-:host{
+:host {
   display: flex;
   width: 100%;
-  min-height: 100vh;
-  // flex-direction: column;
   flex: 1;
 }
 .home-main-container {
@@ -12,9 +10,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
   flex-direction: column;
-  background-image: url("../../../assets/images/home-image2.jpg");
+  background-image: url('../../../assets/images/home-image2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-clip: content-box;
@@ -54,7 +51,8 @@
     font-size: 35px;
     text-align: center;
     font-weight: bold;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',
+      Geneva, Verdana, sans-serif;
     font-weight: 600;
   }
 
@@ -73,16 +71,16 @@
     position: relative;
     display: inline-block;
   }
-  
+
   &__button:after {
     position: absolute;
-    content: "";
+    content: '';
     width: 100%;
     height: 0;
     bottom: 0;
     left: 0;
     z-index: -1;
-     background: #e0e5ec;
+    background: #e0e5ec;
     transition: all 0.3s ease;
   }
   &__button:hover {

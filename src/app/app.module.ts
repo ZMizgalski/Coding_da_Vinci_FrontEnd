@@ -28,15 +28,10 @@ import { MixerCartComponent } from './utils-components/mixer-cart/mixer-cart.com
     MixerComponent,
     NotFoundComponent,
     ImageBrowserComponent,
-    MixerCartComponent
+    MixerCartComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule],
   providers: [ResizeDirective],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

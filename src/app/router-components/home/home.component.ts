@@ -7,21 +7,19 @@ import { SizeEnum } from 'src/app/services/resize-handler/interfaces/size.enum';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-
   private subscriptions: Subscription[] = [];
-  public size: number = 0;
+  public size = 0;
 
-  constructor(private resizeService: ResizeService) { }
+  constructor(private resizeService: ResizeService) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.resizeService.modeChanges.subscribe(newSize=>{
-       this.size = newSize;
+      this.resizeService.modeChanges.subscribe(newSize => {
+        this.size = newSize;
       })
-    )
+    );
   }
-
 }

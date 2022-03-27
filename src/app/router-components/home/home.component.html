@@ -1,12 +1,16 @@
 <div class="home-main-container">
   <span class="home-main-container-overlay"></span>
-  <img class="home-main-container__img" src="../../../assets/images/Abstract Visioner_tr_small.png">
+  <img
+    class="home-main-container__img"
+    src="../../../assets/images/Abstract Visioner_tr_small.png"
+  />
   <div class="home-main-container-data-con">
-    <h2 class="home-main-container-header" [ngStyle]="{'font-size': size == 0 ? '20px': size == 1 ? '30px': size == 2 ? '40px': size == 3 ? '50px': size == 4 ? '60px': '10px'}">
+    <h2
+      class="home-main-container-header"
+      [ngStyle]="{'font-size': size == 0 ? '20px': size == 1 ? '30px': size == 2 ? '40px': size == 3 ? '50px': size == 4 ? '60px': '10px'}"
+    >
       Abstract Visioner
     </h2>
-    <button [routerLink]="['/collection']" class="home-main-container__button">
-      Collection
-    </button>
+    <button [routerLink]="['/collection']" class="home-main-container__button">Collection</button>
   </div>
 </div>

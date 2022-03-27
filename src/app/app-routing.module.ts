@@ -7,16 +7,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path: "home", component: HomeComponent},
-  {path: "collection", component: CollectionComponent},
-  {path: "mixer", component: MixerComponent},
-  {path: "about", component: AboutComponent},
-  {path: "", pathMatch: 'full', redirectTo: "home"},
-  {path: "**", component: NotFoundComponent}
+  { path: 'home', component: HomeComponent },
+  { path: 'collection', component: CollectionComponent },
+  { path: 'mixer', component: MixerComponent },
+  { path: 'about', component: AboutComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

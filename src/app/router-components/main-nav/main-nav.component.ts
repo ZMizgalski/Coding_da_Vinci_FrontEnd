@@ -4,32 +4,30 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.scss']
+  styleUrls: ['./main-nav.component.scss'],
 })
 export class MainNavComponent {
+  public navExpand = false;
+  public cartExpand = false;
 
+  constructor() {}
 
-  public visible = false;
-
-  constructor() { }
-
-  navItems: NavItemModel[] = [
+  public navItems: NavItemModel[] = [
     {
-      name: "Home",
-      routerLink: "home"
+      name: 'Home',
+      routerLink: 'home',
     },
     {
-      name: "Collection",
-      routerLink: "collection"
+      name: 'Collection',
+      routerLink: 'collection',
     },
     {
-      name: "Mixer",
-      routerLink: "mixer"
+      name: 'Mixer',
+      routerLink: 'mixer',
     },
     {
-      name: "About",
-      routerLink: "about"
-    }
-  ]
-
+      name: 'About',
+      routerLink: 'about',
+    },
+  ];
 }

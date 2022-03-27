@@ -1,6 +1,6 @@
-@import "../../../styling/all.scss";
+@import '../../../styling/all.scss';
 
-:host{
+:host {
   @include flex-container;
   flex-direction: row;
 }
@@ -8,11 +8,32 @@
   max-width: 200px;
   flex: unset;
 }
-.nav{
+.nav {
   max-width: 200px;
   flex: unset;
 }
 
-.router{
+.router {
   @include flex-container;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .top-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+  }
+
+  .content-container {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 50px);
+    flex-direction: column;
+  }
 }
