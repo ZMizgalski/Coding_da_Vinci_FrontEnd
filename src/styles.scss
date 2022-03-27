@@ -1,4 +1,4 @@
-@import "./styling/all.scss";
+@import './styling/all.scss';
 
 body {
   width: 100%;
@@ -7,17 +7,22 @@ body {
   color: white;
   min-height: 100vh;
   @include flex-container;
-
-  // background-image: url("https://images.unsplash.com/photo-1488229297570-58520851e868?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
-  // background-size: cover;
-  // background-repeat: no-repeat;
 }
 
-p{
+p {
   margin: 0;
 }
 
-*{
+* {
   box-sizing: border-box;
   font-family: $font;
+}
+
+::-webkit-scrollbar {
+  width: 1em;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $color-background;
+  outline: 1px solid $surface-1;
+  border-radius: 10px;
 }
