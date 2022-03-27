@@ -29,14 +29,17 @@
     background-color: $surface-1;
     width: 100%;
     z-index: 99;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+
+    &__logo {
+      max-width: 100px;
+    }
 
     .links-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
     }
 
     &__link {
