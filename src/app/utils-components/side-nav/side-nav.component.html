@@ -26,6 +26,7 @@
       <a
         class="navigation__item"
         *ngFor="let item of this.items"
+        (click)="toggleNavExpansion($event)"
         [routerLink]="item.routerLink ? item.routerLink : ''"
       >
         <i *ngIf="item.leftIcon" class="item__icon-left pi" [ngClass]="item.leftIcon"></i>

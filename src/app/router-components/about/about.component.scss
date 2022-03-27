@@ -24,12 +24,13 @@
       display: flex;
       width: 100%;
       padding: 20px;
-      background: $surface-2;
+
+      background: $color-background3;
       justify-content: space-around;
       align-items: center;
 
       &__img {
-        max-width: 40%;
+        max-width: 300px;
       }
 
       &-text-con {
@@ -51,13 +52,13 @@
     &-item-mobile {
       display: flex;
       width: 100%;
-      background: $surface-2;
+      background: $color-background3;
       justify-content: space-around;
       align-items: center;
       flex-direction: column;
 
       .container-team-description-item__img {
-        max-width: 75%;
+        max-width: 300px;
       }
 
       .container-team-description-item-text-con {
