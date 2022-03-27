@@ -28,7 +28,7 @@ export class ResizeService {
     return this.sizes.filter(
       item =>
         item.size.minWidth <= size.width &&
-        (item.size.maxWidth >= size.width || item.size.maxWidth == -1)
+        (item.size.maxWidth >= size.width || item.size.maxWidth === -1)
     )[0];
   }
 
