@@ -6,7 +6,7 @@ body {
   background-color: $color-background;
   color: white;
   min-height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   @include flex-container;
 }
 
@@ -20,7 +20,7 @@ p {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 1.5vw;
 }
 ::-webkit-scrollbar-thumb {
   background-color: $color-background2;

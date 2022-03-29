@@ -4,10 +4,12 @@
   @include flex-container;
   flex-direction: row;
 }
+
 .cart {
   max-width: 200px;
   flex: unset;
 }
+
 .nav {
   max-width: 200px;
   flex: unset;
@@ -16,6 +18,8 @@
 .router {
   @include flex-container;
 }
+
+$top-nav-height:80px;
 
 .main-container {
   display: flex;
@@ -31,9 +35,12 @@
     z-index: 99;
     justify-content: flex-end;
     align-items: center;
+    top: 0;
+    height: $top-nav-height;
 
     &__logo {
       max-width: 100px;
+      margin-left: 2%;
     }
 
     .links-container {
@@ -119,9 +126,10 @@
 
   .content-container {
     display: flex;
-    // margin-top: 50px;
     width: 100%;
-    min-height: 100vh;
+    // height: calc(100vh - 90px);
     flex-direction: column;
+    flex: 1;
+    // overflow: auto;
   }
 }
