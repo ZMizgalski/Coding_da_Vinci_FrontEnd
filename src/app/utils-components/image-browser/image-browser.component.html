@@ -1,1 +1,26 @@
-<p>image-browser works!</p>
+<div class="container" *ngIf="this.data.length > 0">
+
+  <div class="sidebar-left sidebar">
+    <i class="pi pi-chevron-left" (click)="this.previousImageClicked()"></i>
+  </div>
+  <div class="image" [@moveLeft]="this.movingLeft ? 'moved' : 'normal'"
+  [@moveRight] = "this.movingRight ? 'moved' : 'normal'"
+  (@moveLeft.done) = "this.movingLeftFinished()"
+  (@moveRight.done) = "this.movingRightFinished()">
+    <div class="image__wrapper image__wrapper-side image__wrapper-side-left image-right-animation">
+      <img *ngIf="this.urlsModels[0]" [src] = "this.urlsModels[0]">
+      <div *ngIf="!this.urlsModels[0]" class="image__loader"></div>
+    </div>
+    <div class="image__wrapper image__wrapper-center image-left-animation image-right-animation">
+      <img *ngIf="this.urlsModels[1]" [src] = "this.urlsModels[1]">
+      <div *ngIf="!this.urlsModels[1]" class="image__loader"></div>
+    </div>
+    <div class="image__wrapper image__wrapper-side image__wrapper-side-right image-left-animation" >
+      <img *ngIf="this.urlsModels[2]" [src] = "this.urlsModels[2]">
+      <div *ngIf="!this.urlsModels[2]" class="image__loader"></div>
+    </div>
+  </div>
+  <div class="sidebar-right sidebar">
+    <i class="pi pi-chevron-right" (click)="this.nextImageClicked()"></i>
+  </div>
+</div>

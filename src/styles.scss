@@ -6,7 +6,7 @@ body {
   background-color: $color-background;
   color: white;
   min-height: 100vh;
-  overflow: auto;
+  overflow: hidden;
   @include flex-container;
 }
 

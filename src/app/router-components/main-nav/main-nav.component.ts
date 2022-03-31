@@ -2,12 +2,13 @@ import { SizeEnum } from 'src/app/services/resize-handler/interfaces/size.enum';
 import { Subscription } from 'rxjs';
 import { ResizeService } from './../../services/resize-handler/resize.service';
 import { NavItemModel } from '../../utils-components/side-nav/side-nav.component';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainNavComponent implements OnInit, OnDestroy {
   public navExpand = false;

@@ -1,11 +1,12 @@
 import { EVENT_WHEN, ImageResponseModel } from './../../models';
 import { DataService } from 'src/app/services/data.service';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CollectionComponent implements OnInit {
   public readonly NORMAL: number = 0;
