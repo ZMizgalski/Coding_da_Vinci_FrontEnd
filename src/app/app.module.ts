@@ -1,3 +1,4 @@
+import { DetailsComponent } from './router-components/details/details.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ResizeDirective } from './services/resize-handler/resize.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MixerCartComponent } from './utils-components/mixer-cart/mixer-cart.component';
+import { ImageComponent } from './utils-components/image/image.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MixerCartComponent } from './utils-components/mixer-cart/mixer-cart.com
     NotFoundComponent,
     ImageBrowserComponent,
     MixerCartComponent,
+    ImageComponent,
+    DetailsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule],
   providers: [ResizeDirective],

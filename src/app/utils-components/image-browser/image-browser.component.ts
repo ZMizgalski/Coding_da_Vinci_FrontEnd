@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { trigger, animate, style, transition, animation, useAnimation, query } from '@angular/animations';
 import { DataService } from 'src/app/services/data.service';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImageResponseModel } from 'src/app/models';
 
 const transformAnimation = animation([
@@ -35,9 +35,10 @@ const transformAnimation = animation([
     ]),
   ]
 })
-export class ImageBrowserComponent implements OnInit {
+export class ImageBrowserComponent {
+  
   private readonly MAX_BUFFER_SIZE = 20;
-  private readonly LOADING_MARGIN = 3;
+  private readonly LOADING_MARGIN = 2;
 
   private subscriptions: Subscription[] = [];
   public data: ImageResponseModel[] = [];
@@ -49,26 +50,57 @@ export class ImageBrowserComponent implements OnInit {
   public movingLeft: boolean = false;
   public movingRight: boolean = false;
 
+  @Output()
+  public indexChange: EventEmitter<number> = new EventEmitter<number>();
 
-  public set currentIndex(value: number){
-    this._currentIndex = value;
+  @Output("animationStart")
+  public animationStart: EventEmitter<void> = new EventEmitter();
+
+  @Input("index")
+  public set indexInput(value: number){
+    this.setCurrentIndex(value, false);
+  }
+  public get indexInput(): number{
+    return this._currentIndex;
+  }
+
+  @Input("images")
+  public set imagesInput(value: ImageResponseModel[]){
+    this.data = value;
     this.loadNearestBlobs();
     this.recalcUrlsModels();
-    this.removeOldImages();
     this.cd.markForCheck();
+  }
+
+  public set currentIndex(value: number){
+    this.setCurrentIndex(value, true);
   }
 
   public get currentIndex(): number{
     return this._currentIndex;
   }
   
+  public onAnimationStart(){
+    this.animationStart.emit();
+  }
+
   public movingLeftFinished(){
     if(!this.movingLeft) return;
-    console.log(this.data);
-    console.log(this.loadedImages);
     this.movingLeft = false;
     this.currentIndex = this.getNearestIndex(1);
   }
+
+  private setCurrentIndex(value: number, callEvent: boolean){
+    if(value === this._currentIndex) return;
+    this._currentIndex = value;
+    this.loadNearestBlobs();
+    this.recalcUrlsModels();
+    this.removeOldImages();
+    if(callEvent)
+      this.indexChange.emit(value);
+    this.cd.markForCheck();
+  }
+
 
   public movingRightFinished(){
     if(!this.movingRight) return;
@@ -76,16 +108,9 @@ export class ImageBrowserComponent implements OnInit {
     this.currentIndex = this.getNearestIndex(-1);
   }
 
-  constructor(private dataService: DataService, private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef) {
   }
 
-  ngOnInit(): void {
-    this.dataService.getImagesData().subscribe(data=>{
-      this.data = data;
-      this.loadNearestBlobs();
-      this.recalcUrlsModels();
-    })
-  }
 
   public recalcUrlsModels(){
     this.urlsModels[0] = this.loadedImages.get(this.getNearestIndex(-1))?.src;
@@ -110,6 +135,7 @@ export class ImageBrowserComponent implements OnInit {
   }
 
   public getNearestIndex(offset: number): number{
+    if(this.data.length <= this.currentIndex) return this.currentIndex;
     return (this._currentIndex + 10 * this.data.length + offset) % this.data.length;
   }
 
@@ -144,6 +170,8 @@ export class ImageBrowserComponent implements OnInit {
 
   public loadBlobToMap(index: number){
     if(this.loadedImages.has(index)) return;
+    if(this.data.length <= index) return;
+    console.log(index, this.data.length)
     let image = new Image();
     image.src = this.data[index].mainImage;
     this.loadedImages.set(index, image);

@@ -1,16 +1,16 @@
 import { ImageResponseModel } from '../models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, from, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { API_URL } from '../models';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   private readonly URL = `${API_URL}`;
+
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
@@ -19,7 +19,7 @@ export class DataService {
   }
 
   public getBlobImage(url: string): Observable<SafeUrl>{
-    return this.http.get(url, {responseType: 'blob', headers: this.createCrossOriginHeader()}).pipe(
+    return this.http.get(url, {responseType: 'blob'}).pipe(
       map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))),
       catchError(()=>{
         return of(url);
