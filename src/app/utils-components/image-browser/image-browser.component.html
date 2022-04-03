@@ -4,12 +4,16 @@
     <a class="pi pi-chevron-left" onclick="return false" [href]="'details/' + this.getNearestIndex(-1)"
      (click)="this.previousImageClicked()"></a>
   </div>
-  <div class="image" [@moveLeft]="this.movingLeft ? 'moved' : 'normal'"
-  [@moveRight] = "this.movingRight ? 'moved' : 'normal'"
+  <div class="image" [@moveLeft]="{value: this.movingLeft ? 'moved' : 'normal', params:{
+    animationTime: this.animationTime
+  }}"
+  [@moveRight] = "{value: this.movingRight ? 'moved' : 'normal', params:{
+    animationTime: this.animationTime
+  }}"
   (@moveLeft.done) = "this.movingLeftFinished()"
   (@moveRight.done) = "this.movingRightFinished()"
-  (@moveRight.start) = "this.onAnimationStart()"
-  (@moveLeft.start) = "this.onAnimationStart()">
+  (@moveRight.start) = "this.movingRightStart()"
+  (@moveLeft.start) = "this.movingLeftStart()">
     <div class="image__wrapper image__wrapper-side image__wrapper-side-left image-right-animation">
       <app-image class="image__img" *ngIf="this.urlsModels[0]" [src]="this.urlsModels[0]"></app-image>
     </div>
