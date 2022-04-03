@@ -1,12 +1,11 @@
 import { Subscription } from 'rxjs';
 import { trigger, animate, style, transition, animation, useAnimation, query } from '@angular/animations';
-import { DataService } from 'src/app/services/data.service';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Output, EventEmitter } from '@angular/core';
 import { ImageResponseModel } from 'src/app/models';
 
 const transformAnimation = animation([
   style("*"),
-  animate("400ms ease", style({transform: "translateX({{translateX}})", visibility: 'visible'}))
+  animate("{{animationTime}}ms ease", style({transform: "translateX({{translateX}})", visibility: 'visible'}))
 ])
 
 @Component({
@@ -39,12 +38,15 @@ export class ImageBrowserComponent {
   
   private readonly MAX_BUFFER_SIZE = 20;
   private readonly LOADING_MARGIN = 2;
+    
+  @Input() animationTime: number = 400;
 
   private subscriptions: Subscription[] = [];
   public data: ImageResponseModel[] = [];
   public _currentIndex: number = 0;
   public loadedImages: Map<number, HTMLImageElement> = new Map();
   public urlsModels: (string | undefined)[] = []; //from left to right, 3 in total;
+  // private indexChangeTimeoutId?: any;
 
   //animations
   public movingLeft: boolean = false;
@@ -54,7 +56,7 @@ export class ImageBrowserComponent {
   public indexChange: EventEmitter<number> = new EventEmitter<number>();
 
   @Output("animationStart")
-  public animationStart: EventEmitter<void> = new EventEmitter();
+  public animationStart: EventEmitter<number> = new EventEmitter<number>();
 
   @Input("index")
   public set indexInput(value: number){
@@ -80,14 +82,29 @@ export class ImageBrowserComponent {
     return this._currentIndex;
   }
   
-  public onAnimationStart(){
-    this.animationStart.emit();
+  constructor(private cd: ChangeDetectorRef) {
+  }
+
+  public movingRightStart(){
+    if(!this.movingRight) return;
+    this.animationStart.emit(-1);
+  }
+
+  public movingLeftStart(){
+    if(!this.movingLeft) return;
+    this.animationStart.emit(1);
   }
 
   public movingLeftFinished(){
     if(!this.movingLeft) return;
     this.movingLeft = false;
     this.currentIndex = this.getNearestIndex(1);
+  }
+
+  public movingRightFinished(){
+    if(!this.movingRight) return;
+    this.movingRight = false;
+    this.currentIndex = this.getNearestIndex(-1);
   }
 
   private setCurrentIndex(value: number, callEvent: boolean){
@@ -100,17 +117,6 @@ export class ImageBrowserComponent {
       this.indexChange.emit(value);
     this.cd.markForCheck();
   }
-
-
-  public movingRightFinished(){
-    if(!this.movingRight) return;
-    this.movingRight = false;
-    this.currentIndex = this.getNearestIndex(-1);
-  }
-
-  constructor(private cd: ChangeDetectorRef) {
-  }
-
 
   public recalcUrlsModels(){
     this.urlsModels[0] = this.loadedImages.get(this.getNearestIndex(-1))?.src;
@@ -171,7 +177,6 @@ export class ImageBrowserComponent {
   public loadBlobToMap(index: number){
     if(this.loadedImages.has(index)) return;
     if(this.data.length <= index) return;
-    console.log(index, this.data.length)
     let image = new Image();
     image.src = this.data[index].mainImage;
     this.loadedImages.set(index, image);
