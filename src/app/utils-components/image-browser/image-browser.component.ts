@@ -1,13 +1,29 @@
 import { Subscription } from 'rxjs';
-import { trigger, animate, style, transition, animation, useAnimation, query } from '@angular/animations';
+import {
+  trigger,
+  animate,
+  style,
+  transition,
+  animation,
+  useAnimation,
+  query,
+} from '@angular/animations';
 import { DataService } from 'src/app/services/data.service';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { ImageResponseModel } from 'src/app/models';
 
 const transformAnimation = animation([
-  style("*"),
-  animate("400ms ease", style({transform: "translateX({{translateX}})", visibility: 'visible'}))
-])
+  style('*'),
+  animate('400ms ease', style({ transform: 'translateX({{translateX}})', visibility: 'visible' })),
+]);
 
 @Component({
   selector: 'app-image-browser',
@@ -15,28 +31,31 @@ const transformAnimation = animation([
   styleUrls: ['./image-browser.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger("moveRight", [
-      transition("normal => moved", [
-        query(".image-right-animation",[
-          useAnimation(transformAnimation, {params:{
-            translateX: '100%'
-            }})
-        ])
-      ])
+    trigger('moveRight', [
+      transition('normal => moved', [
+        query('.image-right-animation', [
+          useAnimation(transformAnimation, {
+            params: {
+              translateX: '100%',
+            },
+          }),
+        ]),
+      ]),
     ]),
-    trigger("moveLeft", [
-      transition("normal => moved",[
-        query(".image-left-animation",[
-          useAnimation(transformAnimation, {params:{
-            translateX: '-100%'
-          }})
-        ])
-      ])
+    trigger('moveLeft', [
+      transition('normal => moved', [
+        query('.image-left-animation', [
+          useAnimation(transformAnimation, {
+            params: {
+              translateX: '-100%',
+            },
+          }),
+        ]),
+      ]),
     ]),
-  ]
+  ],
 })
 export class ImageBrowserComponent {
-  
   private readonly MAX_BUFFER_SIZE = 20;
   private readonly LOADING_MARGIN = 2;
 
@@ -53,94 +72,93 @@ export class ImageBrowserComponent {
   @Output()
   public indexChange: EventEmitter<number> = new EventEmitter<number>();
 
-  @Output("animationStart")
+  @Output('animationStart')
   public animationStart: EventEmitter<void> = new EventEmitter();
 
-  @Input("index")
-  public set indexInput(value: number){
+  @Input('index')
+  public set indexInput(value: number) {
     this.setCurrentIndex(value, false);
   }
-  public get indexInput(): number{
+  public get indexInput(): number {
     return this._currentIndex;
   }
 
-  @Input("images")
-  public set imagesInput(value: ImageResponseModel[]){
+  @Input('images')
+  public set imagesInput(value: ImageResponseModel[]) {
     this.data = value;
     this.loadNearestBlobs();
     this.recalcUrlsModels();
     this.cd.markForCheck();
   }
 
-  public set currentIndex(value: number){
+  public set currentIndex(value: number) {
     this.setCurrentIndex(value, true);
   }
 
-  public get currentIndex(): number{
+  public get currentIndex(): number {
     return this._currentIndex;
   }
-  
-  public onAnimationStart(){
+
+  public onAnimationStart() {
     this.animationStart.emit();
   }
 
-  public movingLeftFinished(){
-    if(!this.movingLeft) return;
+  public movingLeftFinished() {
+    if (!this.movingLeft) return;
     this.movingLeft = false;
     this.currentIndex = this.getNearestIndex(1);
   }
 
-  private setCurrentIndex(value: number, callEvent: boolean){
-    if(value === this._currentIndex) return;
+  private setCurrentIndex(value: number, callEvent: boolean) {
+    if (value === this._currentIndex) return;
     this._currentIndex = value;
     this.loadNearestBlobs();
     this.recalcUrlsModels();
     this.removeOldImages();
-    if(callEvent)
-      this.indexChange.emit(value);
+    if (callEvent) this.indexChange.emit(value);
     this.cd.markForCheck();
+    console.log(this.data);
+    console.log(this.loadedImages);
+    console.log(this.urlsModels);
   }
 
-
-  public movingRightFinished(){
-    if(!this.movingRight) return;
+  public movingRightFinished() {
+    if (!this.movingRight) return;
     this.movingRight = false;
     this.currentIndex = this.getNearestIndex(-1);
   }
 
-  constructor(private cd: ChangeDetectorRef) {
-  }
+  constructor(private cd: ChangeDetectorRef) {}
 
-
-  public recalcUrlsModels(){
+  public recalcUrlsModels() {
     this.urlsModels[0] = this.loadedImages.get(this.getNearestIndex(-1))?.src;
     this.urlsModels[1] = this.loadedImages.get(this._currentIndex)?.src;
     this.urlsModels[2] = this.loadedImages.get(this.getNearestIndex(1))?.src;
     this.cd.markForCheck();
   }
 
-  public loadNearestBlobs(){
-    for(let i = -this.LOADING_MARGIN; i <= this.LOADING_MARGIN; i++){
+  public loadNearestBlobs() {
+    for (let i = -this.LOADING_MARGIN; i <= this.LOADING_MARGIN; i++) {
       this.loadBlobToMap(this.getNearestIndex(i));
     }
     this.cd.markForCheck();
   }
 
-  public getNearestIndexes(offset = this.LOADING_MARGIN): number[]{
+  public getNearestIndexes(offset = this.LOADING_MARGIN): number[] {
     let indexes: number[] = [];
-    for(let i = -offset; i <= offset; i++){
+    for (let i = -offset; i <= offset; i++) {
       indexes.push(this.getNearestIndex(i));
     }
     return indexes;
   }
 
-  public getNearestIndex(offset: number): number{
-    if(this.data.length <= this.currentIndex) return this.currentIndex;
+  public getNearestIndex(offset: number): number {
+    if (this.data.length <= this.currentIndex) return this.currentIndex;
     return (this._currentIndex + 10 * this.data.length + offset) % this.data.length;
   }
 
-  public nextImageClicked(){
-    if(this.movingLeft){
+  public nextImageClicked() {
+    if (this.movingLeft) {
       this.movingLeftFinished();
       setTimeout(() => {
         this.movingLeft = true;
@@ -153,8 +171,8 @@ export class ImageBrowserComponent {
     // this.currentIndex = this.getNearestIndex(1);
   }
 
-  public previousImageClicked(){
-    if(this.movingRight){
+  public previousImageClicked() {
+    if (this.movingRight) {
       this.movingRightFinished();
       setTimeout(() => {
         this.movingRight = true;
@@ -167,26 +185,25 @@ export class ImageBrowserComponent {
     // this.currentIndex = this.getNearestIndex(-1);
   }
 
-
-  public loadBlobToMap(index: number){
-    if(this.loadedImages.has(index)) return;
-    if(this.data.length <= index) return;
-    console.log(index, this.data.length)
+  public loadBlobToMap(index: number) {
+    if (this.loadedImages.has(index)) return;
+    if (this.data.length <= index) return;
+    console.log(index, this.data.length);
     let image = new Image();
     image.src = this.data[index].mainImage;
     this.loadedImages.set(index, image);
   }
 
-  public removeOldImages(){
-    if(this.loadedImages.size < this.MAX_BUFFER_SIZE) return;
+  public removeOldImages() {
+    if (this.loadedImages.size < this.MAX_BUFFER_SIZE) return;
     const itemsToRemoveCount = this.loadedImages.size - this.MAX_BUFFER_SIZE;
     let i = 0;
-    let keysToRemove: number[] = []
-    for(let key of this.loadedImages.keys()){
-      if(i>=itemsToRemoveCount) break;
+    let keysToRemove: number[] = [];
+    for (let key of this.loadedImages.keys()) {
+      if (i >= itemsToRemoveCount) break;
       keysToRemove.push(key);
       i++;
     }
-    keysToRemove.forEach(key=>this.loadedImages.delete(key));
+    keysToRemove.forEach(key => this.loadedImages.delete(key));
   }
 }

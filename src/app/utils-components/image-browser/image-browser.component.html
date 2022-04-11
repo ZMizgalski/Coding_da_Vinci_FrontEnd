@@ -1,27 +1,49 @@
 <div class="container" *ngIf="this.data.length > 0">
-
   <div class="sidebar-left sidebar">
-    <a class="pi pi-chevron-left" onclick="return false" [href]="'details/' + this.getNearestIndex(-1)"
-     (click)="this.previousImageClicked()"></a>
+    <a
+      class="pi pi-chevron-left"
+      onclick="return false"
+      [href]="'details/' + this.getNearestIndex(-1)"
+      (click)="this.previousImageClicked()"
+    ></a>
   </div>
-  <div class="image" [@moveLeft]="this.movingLeft ? 'moved' : 'normal'"
-  [@moveRight] = "this.movingRight ? 'moved' : 'normal'"
-  (@moveLeft.done) = "this.movingLeftFinished()"
-  (@moveRight.done) = "this.movingRightFinished()"
-  (@moveRight.start) = "this.onAnimationStart()"
-  (@moveLeft.start) = "this.onAnimationStart()">
+  <div
+    class="image"
+    [@moveLeft]="this.movingLeft ? 'moved' : 'normal'"
+    [@moveRight]="this.movingRight ? 'moved' : 'normal'"
+    (@moveLeft.done)="this.movingLeftFinished()"
+    (@moveRight.done)="this.movingRightFinished()"
+    (@moveRight.start)="this.onAnimationStart()"
+    (@moveLeft.start)="this.onAnimationStart()"
+  >
     <div class="image__wrapper image__wrapper-side image__wrapper-side-left image-right-animation">
-      <app-image class="image__img" *ngIf="this.urlsModels[0]" [src]="this.urlsModels[0]"></app-image>
+      <app-image
+        class="image__img"
+        *ngIf="this.urlsModels[0]"
+        [src]="this.urlsModels[0]"
+      ></app-image>
     </div>
     <div class="image__wrapper image__wrapper-center image-left-animation image-right-animation">
-      <app-image class="image__img" *ngIf="this.urlsModels[1]" [src]="this.urlsModels[1]"></app-image>
+      <app-image
+        class="image__img"
+        *ngIf="this.urlsModels[1]"
+        [src]="this.urlsModels[1]"
+      ></app-image>
     </div>
-    <div class="image__wrapper image__wrapper-side image__wrapper-side-right image-left-animation" >
-      <app-image class="image__img" *ngIf="this.urlsModels[2]" [src]="this.urlsModels[2]"></app-image>
+    <div class="image__wrapper image__wrapper-side image__wrapper-side-right image-left-animation">
+      <app-image
+        class="image__img"
+        *ngIf="this.urlsModels[2]"
+        [src]="this.urlsModels[2]"
+      ></app-image>
     </div>
   </div>
   <div class="sidebar-right sidebar">
-    <a class="pi pi-chevron-right" onclick="return false" [href]="'details/' + this.getNearestIndex(1)"
-     (click)="this.nextImageClicked()"></a>
+    <a
+      class="pi pi-chevron-right"
+      onclick="return false"
+      [href]="'details/' + this.getNearestIndex(1)"
+      (click)="this.nextImageClicked()"
+    ></a>
   </div>
 </div>
