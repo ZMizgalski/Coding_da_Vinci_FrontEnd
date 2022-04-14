@@ -1,7 +1,9 @@
-<div class="container">
+<div class="container" *ngIf="this.loaded | async">
   <div
     class="model"
-    *ngFor="let model of this.data; let i = index; trackBy: this.trackByTitle"
+    (click)="makeRoute(i)"
+    *ngFor="let item of items; let i = index; trackBy: this.trackByTitle"
+    [@ease]="item.state"
     [ngClass]="{'model--standard': this.imagesModes[i]===this.NORMAL,
    'model--panoramic': this.imagesModes[i]===this.PANORAMIC,
     'model--ultra-panoramic': this.imagesModes[i]===this.ULTRA_PANORAMIC}"
@@ -11,11 +13,11 @@
       (load)="this.calcIsPanoramic(image, i)"
       class="model__image"
       loading="lazy"
-      [src]="model.mainImage"
+      [src]="item.item.mainImage"
     />
     <p class="model__title">
-      "{{model.mainTitle}}"
-      <span class="model__date">{{this.getCreateDate(model)}}</span>
+      "{{item.item.mainTitle}}"
+      <span class="model__date">{{this.getCreateDate(item)}}</span>
     </p>
   </div>
 </div>
