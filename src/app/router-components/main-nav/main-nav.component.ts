@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ResizeService } from './../../services/resize-handler/resize.service';
 import { NavItemModel } from '../../utils-components/side-nav/side-nav.component';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { animate, animation, style, transition, trigger, useAnimation } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
