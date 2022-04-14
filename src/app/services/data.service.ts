@@ -11,27 +11,26 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class DataService {
   private readonly URL = `${API_URL}`;
 
-
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   public getImagesData(): Observable<ImageResponseModel[]> {
     return this.http.get<ImageResponseModel[]>(`${API_URL}/getData`);
   }
 
-  public getBlobImage(url: string): Observable<SafeUrl>{
-    return this.http.get(url, {responseType: 'blob'}).pipe(
+  public getBlobImage(url: string): Observable<SafeUrl> {
+    return this.http.get(url, { responseType: 'blob' }).pipe(
       map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))),
-      catchError(()=>{
+      catchError(() => {
         return of(url);
       })
-    )
+    );
   }
 
-  private createCrossOriginHeader(): HttpHeaders{
+  private createCrossOriginHeader(): HttpHeaders {
     let header = new HttpHeaders();
     header.append('Access-Control-Allow-Origin', 'https://sachsen.museum-digital.de/');
-    header.append('Access-Control-Allow-Methods', 'GET')
-    header.append('Access-Control-Allow-Headers', 'X-Requested-With,blob')
+    header.append('Access-Control-Allow-Methods', 'GET');
+    header.append('Access-Control-Allow-Headers', 'X-Requested-With,blob');
     // header.append("mode", "no-cors");
     return header;
   }

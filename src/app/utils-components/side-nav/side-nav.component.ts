@@ -118,13 +118,14 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push( 
+    this.subscriptions.push(
       this.resizeService.modeChanges.subscribe(item => {
         if (item <= SizeEnum.SMALL) {
           this.isHeadset.next(true);
         } else {
-          this.isHeadset.next(false);  
+          this.isHeadset.next(false);
         }
-    }));
+      })
+    );
   }
 }

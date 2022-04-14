@@ -3,34 +3,31 @@ import { Component, Input, OnInit, ChangeDetectorRef, Output } from '@angular/co
 @Component({
   selector: 'app-image',
   template: `
-    <img class="image" [src] = "this.currentSrc">
+    <img class="image" [src]="this.currentSrc" />
     <div *ngIf="this.isLoading" class="overlay">
       <i class="pi pi-spinner pi-spin"></i>
     </div>
   `,
-  styleUrls: ['./image.component.scss']
+  styleUrls: ['./image.component.scss'],
 })
 export class ImageComponent implements OnInit {
-
-  public currentSrc: string = "";
-  public altImageSrc: string = "";
+  public currentSrc: string = '';
+  public altImageSrc: string = '';
   public internalImage: HTMLImageElement = new Image();
   public isLoading: boolean = false;
 
-
-  @Input("altSrc")
-  public set altImageInput(value: string){
+  @Input('altSrc')
+  public set altImageInput(value: string) {
     this.altImageInput = value;
     this.cd.markForCheck();
   }
-  
-  @Input("src")
-  public set mainImageInput(value: string){
+
+  @Input('src')
+  public set mainImageInput(value: string) {
     this.internalImage.src = value;
-    if(this.internalImage.complete){
+    if (this.internalImage.complete) {
       this.currentSrc = value;
-    }
-    else{
+    } else {
       this.currentSrc = this.altImageSrc;
       this.isLoading = true;
     }
@@ -38,33 +35,30 @@ export class ImageComponent implements OnInit {
     this.cd.markForCheck();
   }
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.internalImage.onload = this.onInternalImageLoaded.bind(this);
     this.internalImage.onerror = this.onInternalImageError.bind(this);
   }
 
-  public onInternalImageLoaded(){
+  public onInternalImageLoaded() {
     this.currentSrc = this.internalImage.src;
     this.isLoading = false;
     this.cd.markForCheck();
   }
 
-  public onInternalImageError(){
+  public onInternalImageError() {
     this.isLoading = false;
     this.cd.markForCheck();
   }
 
-  public onImageError(){
-    if(this.altImageSrc){
+  public onImageError() {
+    if (this.altImageSrc) {
       this.currentSrc = this.altImageSrc;
       this.cd.markForCheck();
     }
   }
 
-  public onImageLoaded(){
-    
-  }
-
+  public onImageLoaded() {}
 }

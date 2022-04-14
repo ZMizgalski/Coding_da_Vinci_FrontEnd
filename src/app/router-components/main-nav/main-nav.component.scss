@@ -76,7 +76,7 @@ $top-nav-height:80px;
       text-align: center;
       letter-spacing: 0;
     }
-    
+
     &__link:after {
       content: '';
       position: absolute;
@@ -89,13 +89,13 @@ $top-nav-height:80px;
       transform-origin: bottom right;
       transition: transform 0.25s ease-out;
     }
-    
+
     &__link:hover:after {
       transform: scaleX(1);
       transform-origin: bottom left;
     }
 
-   
+
 
     &__button {
       padding: 10px 10px 10px 5px;

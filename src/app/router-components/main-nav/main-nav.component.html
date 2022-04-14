@@ -1,7 +1,17 @@
 <div class="main-container">
   <div class="top-nav">
-    <img [@ease] *ngIf="isHeadset" class="top-nav__logo" src="../../../assets/images/Abstract Visioner_tr_small.png" />
-    <span [@ease2] *ngIf="!isHeadset" class="top-nav__button" (click)="this.navExpand = !this.navExpand">
+    <img
+      [@ease]
+      *ngIf="isHeadset"
+      class="top-nav__logo"
+      src="../../../assets/images/Abstract Visioner_tr_small.png"
+    />
+    <span
+      [@ease2]
+      *ngIf="!isHeadset"
+      class="top-nav__button"
+      (click)="this.navExpand = !this.navExpand"
+    >
       <i class="pi pi-align-justify"> </i>
     </span>
     <span class="links-container" [@ease] *ngIf="isHeadset">
@@ -14,7 +24,11 @@
       ></span
     >
 
-    <span [ngClass]="isHeadset ? 'top-nav__button-headset': ''" class="top-nav__button" (click)="this.cartExpand = !this.cartExpand">
+    <span
+      [ngClass]="isHeadset ? 'top-nav__button-headset': ''"
+      class="top-nav__button"
+      (click)="this.cartExpand = !this.cartExpand"
+    >
       <i class="pi pi-sliders-v"> </i>
     </span>
   </div>

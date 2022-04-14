@@ -30,7 +30,7 @@ import { ImageComponent } from './utils-components/image/image.component';
     ImageBrowserComponent,
     MixerCartComponent,
     ImageComponent,
-    DetailsComponent
+    DetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule],
   providers: [ResizeDirective],

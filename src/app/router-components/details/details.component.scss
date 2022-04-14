@@ -1,6 +1,6 @@
 @import "../../../styling/all.scss";
 
-:host{
+:host {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -8,7 +8,7 @@
   justify-content: center;
 }
 
-.content{
+.content {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -17,18 +17,18 @@
   width: 100%;
 }
 
-.image-browser{
+.image-browser {
   width: 60%;
   height: 500px;
   margin: 50px 0 100px 0;
 }
 
-.title{
+.title {
   width: 95%;
   text-align: center;
 }
 
-.hidden-content{
+.hidden-content {
   display: none;
   opacity: 0;
 }

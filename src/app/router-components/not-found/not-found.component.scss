@@ -33,13 +33,16 @@
     background: #e0e5ec;
     transition: all 0.3s ease;
   }
+
   &__button:hover {
     color: #000;
   }
+
   &__button:hover:after {
     top: 0;
     height: 100%;
   }
+
   &__button:active {
     top: 2px;
   }
@@ -50,6 +53,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+
     &__p {
       text-align: center;
       color: white;
@@ -59,6 +63,7 @@
       letter-spacing: 5px;
       font-size: 200px;
     }
+
     &__h3 {
       text-align: center;
       color: white;

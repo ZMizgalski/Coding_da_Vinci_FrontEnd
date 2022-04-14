@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { EVENT_WHEN, ImageResponseModel, ImageResponseModelWithAnimation } from './../../models';
 import { DataService } from 'src/app/services/data.service';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { trigger, transition, style, animate} from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-collection',
@@ -12,15 +12,10 @@ import { trigger, transition, style, animate} from '@angular/animations';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('ease', [
-      transition(':enter', [
-        style({opacity:0}),
-        animate(1000, style({opacity:1})) 
-      ]),
-      transition(':leave', [
-        animate(200, style({opacity:0})) 
-      ])
-    ])
-    ]
+      transition(':enter', [style({ opacity: 0 }), animate(1000, style({ opacity: 1 }))]),
+      transition(':leave', [animate(200, style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class CollectionComponent implements OnInit {
   public readonly NORMAL: number = 0;
@@ -45,7 +40,7 @@ export class CollectionComponent implements OnInit {
   }
 
   private mapAllItemsForAnmiation(data: ImageResponseModel[]): ImageResponseModelWithAnimation[] {
-    return data.map(item => ({item: item, state: 'initial'}));
+    return data.map(item => ({ item: item, state: 'initial' }));
   }
 
   ngOnInit(): void {

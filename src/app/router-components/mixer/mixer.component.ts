@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   selector: 'app-mixer',
   templateUrl: './mixer.component.html',
   styleUrls: ['./mixer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MixerComponent implements OnInit {
   constructor() {}

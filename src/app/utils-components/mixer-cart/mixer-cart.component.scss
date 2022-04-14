@@ -75,13 +75,16 @@
       background: #e0e5ec;
       transition: all 0.3s ease;
     }
+
     &__button:hover {
       color: #000;
     }
+
     &__button:hover:after {
       top: 0;
       height: 100%;
     }
+
     &__button:active {
       top: 2px;
     }

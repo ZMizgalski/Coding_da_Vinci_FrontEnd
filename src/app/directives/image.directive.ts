@@ -5,25 +5,24 @@ import { Directive, ElementRef, Input } from '@angular/core';
   host: {
     '(load)': 'onImageLoaded()',
     '(error)': 'onImageError()',
-    '[src]': 'currentSrc'
-  }
+    '[src]': 'currentSrc',
+  },
 })
 export class ImageDirective {
-  public currentSrc: string = "";
-  public mainImageSrc: string = "";
-  @Input("altImage")
-  public altImageSrc: string = "";
+  public currentSrc: string = '';
+  public mainImageSrc: string = '';
+  @Input('altImage')
+  public altImageSrc: string = '';
   private image: HTMLImageElement = new Image();
   public imageLoading: boolean = false;
-  
 
-  @Input("src")
-  public set mainImageSrcInput(value: string){
+  @Input('src')
+  public set mainImageSrcInput(value: string) {
     this.currentSrc = this.altImageSrc;
     this.imageLoading = true;
     this.image.src = value;
   }
-  public get mainImageSrcInput(): string{
+  public get mainImageSrcInput(): string {
     return this.mainImageSrc;
   }
 
@@ -32,28 +31,24 @@ export class ImageDirective {
     this.image.onerror = this.onInternalImageError.bind(this);
   }
 
-  private onInternalImageError(){
+  private onInternalImageError() {
     this.currentSrc = this.altImageSrc;
     this.imageLoading = false;
   }
 
-  private onInternalImageLoaded(event: Event){
+  private onInternalImageLoaded(event: Event) {
     this.currentSrc = this.image.src;
   }
 
-  public onImageLoaded(){
-    if(this.currentSrc === this.mainImageSrc)
-      this.imageLoading = false;
+  public onImageLoaded() {
+    if (this.currentSrc === this.mainImageSrc) this.imageLoading = false;
   }
 
-  public onImageError(){
+  public onImageError() {
     this.currentSrc = this.altImageSrc;
   }
 
-  public addOverlay(){
-  }
+  public addOverlay() {}
 
-  public removeOverlay(){
-    
-  }
+  public removeOverlay() {}
 }

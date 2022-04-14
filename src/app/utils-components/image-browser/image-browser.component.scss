@@ -1,6 +1,6 @@
 @import "../../../styling/all.scss";
 
-:host{
+:host {
   display: flex;
   flex-direction: row;
   width: 80%;
@@ -8,12 +8,12 @@
   margin-top: 200px;
 }
 
-a{
+a {
   text-decoration: none;
   color: unset;
 }
 
-.container{
+.container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -23,7 +23,7 @@ a{
   overflow: hidden;
 }
 
-.sidebar{
+.sidebar {
   min-width: 60px;
   background-color: $surface-1;
   height: 100%;
@@ -33,43 +33,43 @@ a{
   justify-content: center;
   z-index: 1;
 
-  .pi{
+  .pi {
     font-size: 300%;
     padding: 10%;
     cursor: pointer;
   }
 }
 
-.image{
+.image {
   height: 100%;
   position: relative;
   width: 100%;
 
-  &__wrapper{
+  &__wrapper {
     position: absolute;
     overflow: hidden;
     width: 100%;
     height: 100%;
     padding: 20px;
 
-    &-side{
+    &-side {
 
-      &-left{
+      &-left {
         left: -100%;
       }
 
-      &-right{
+      &-right {
         right: -100%
       }
     }
   }
 
-  &__img{
+  &__img {
     width: 100%;
     height: 100%;
   }
 
-  &-hidden{
+  &-hidden {
     display: none
   }
 }
