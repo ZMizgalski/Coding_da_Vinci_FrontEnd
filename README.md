@@ -32,7 +32,7 @@ List the ready features here:
 
 ## Usage
 1. Create a folder named you like.
-2. Inside your folder, open console and paste: `git clone https://github.com/ZMizgalski/Library-Example-Angular.git`
+2. Inside your folder, open console and paste: `git clone https://github.com/ZMizgalski/Coding_da_Vinci_FrontEnd.git`
 3. Then you are ready to go just open it in any Editor. (I prefer VSCode) [Download here](https://code.visualstudio.com/)
 
 ## Project Status
@@ -40,8 +40,6 @@ Project is:  _complete_ .
 
 ## Room for Improvement
 - Design
-- Filters
-- Security
 
 ## Contact
 Created by [@zmizgalski](https://zmizgalski.github.io/) - feel free to contact me!
