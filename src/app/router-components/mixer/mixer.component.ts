@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Subscription, Subject } from 'rxjs';
+import { ResizeService } from './../../services/resize-handler/resize.service';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-mixer',
@@ -6,8 +8,20 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./mixer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MixerComponent implements OnInit {
-  constructor() {}
+export class MixerComponent implements OnInit, OnDestroy {
+  private subscriptions: Subscription[] = [];
+  public size: Subject<number> = new Subject();
+  constructor(public resizeService: ResizeService) {}
 
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(item => item.unsubscribe());
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.resizeService.modeChanges.subscribe(mode => {
+        this.size.next(mode);
+      })
+    );
+  }
 }

@@ -1,0 +1,113 @@
+@import '../../../styling/all.scss';
+
+:host {
+    flex-grow: 1;
+    flex-basis: 0;
+    overflow-y: scroll;
+}
+
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 80px);
+    justify-content: center;
+    flex-direction: column;
+    background: transparent;
+    align-items: center;
+
+
+    .img-container-tiny {
+        max-height: 500px;
+        width: 80vw;
+    }
+
+    .img-container-small {
+        max-height: 500px;
+        width: 80vw;
+    }
+
+    .img-container-medium {
+        max-height: 600px;
+        width: 400px;
+    }
+
+    .img-container-large {
+        max-height: 700px;
+        width: 600px;
+    }
+
+    .img-container {
+        display: flex;
+        background: $surface-2;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        flex-direction: column;
+        align-content: center;
+        flex-wrap: wrap;
+        max-width: 100%;
+        border-radius: 5px;
+
+        .img {
+            max-width: 100%;
+        }
+    }
+
+    .actions-container {
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+
+        .action-button {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .action-button {
+            width: 150px;
+            height: 50px;
+            padding: 10px 25px;
+            border: 2px solid white;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            color: white;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            z-index: 9;
+        }
+
+        .action-button:after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            background: #e0e5ec;
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            color: #000;
+        }
+
+        .action-button:hover:after {
+            top: 0;
+            height: 100%;
+        }
+
+        .action-button:active {
+            top: 2px;
+        }
+    }
+
+}
