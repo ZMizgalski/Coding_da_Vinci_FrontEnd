@@ -60,6 +60,8 @@ export class MainNavComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.resizeService.modeChanges.subscribe(item => {
         if (item <= SizeEnum.MEDIUM) {
+          this.navExpand ? (this.navExpand = false) : '';
+          this.cartExpand ? (this.cartExpand = false) : '';
           this.isHeadset = false;
         } else {
           this.isHeadset = true;
