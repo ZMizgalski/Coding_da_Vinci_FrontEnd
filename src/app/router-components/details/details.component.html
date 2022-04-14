@@ -1,19 +1,23 @@
 <div
-  class="content"
+  class="main-container"
   *ngIf="this.data[currentIndex]"
   [@switchContent]="{value: this.animationCounter, params:{
   animationTime: this.animationTime
 }}"
   (@switchContent.done)="this.onAnimationFinished()"
 >
-  <h2 class="content">{{this.data[this.displayIndex].mainTitle}}</h2>
-  <app-image-browser
-    class="image-browser"
-    [index]="this.currentIndex"
-    (indexChange)="this.onIndexChange($event)"
-    [images]="this.data"
-    (animationStart)="this.startAnimation($event)"
-    [animationTime]="this.animationTime"
-  ></app-image-browser>
-  <p class="content">{{this.data[this.displayIndex].description}}</p>
+  <h2 class="main-container__header">{{this.data[this.displayIndex].mainTitle}}</h2>
+  <div class="image-container">
+    <app-image-browser
+      class="image-container__image-browser"
+      [index]="this.currentIndex"
+      (indexChange)="this.onIndexChange($event)"
+      [images]="this.data"
+      (animationStart)="this.startAnimation($event)"
+      [animationTime]="this.animationTime"
+    ></app-image-browser>
+  </div>
+  <div class="data-container">
+    <p class="data-container__p">{{this.data[this.displayIndex].description}}</p>
+  </div>
 </div>
