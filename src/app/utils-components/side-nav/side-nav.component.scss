@@ -10,6 +10,7 @@
 
 .side-nav-container {
   position: fixed;
+  transition: ease 0.2s;
   display: flex;
   z-index: 99999;
   overflow-y: scroll;

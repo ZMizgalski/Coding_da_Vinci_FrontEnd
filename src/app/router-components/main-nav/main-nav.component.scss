@@ -21,6 +21,10 @@
 
 $top-nav-height:80px;
 
+.top-nav__button-headset {
+  margin-right: 5%;
+}
+
 .main-container {
   display: flex;
   width: 100%;
@@ -43,7 +47,7 @@ $top-nav-height:80px;
 
     &__logo {
       max-width: 100px;
-      margin-left: 2%;
+      margin-left: 5%;
     }
 
     .links-container {
@@ -54,7 +58,6 @@ $top-nav-height:80px;
     }
 
     &__link {
-      width: 100%;
       text-decoration: none;
       margin: 10px;
       display: flex;
@@ -73,42 +76,31 @@ $top-nav-height:80px;
       text-align: center;
       letter-spacing: 0;
     }
-
-    &__link:hover,
-    &__link:active {
-      letter-spacing: 2px;
+    
+    &__link:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: $surface-2;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+    
+    &__link:hover:after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
     }
 
-    &__link:after,
-    &__link:before {
-      backface-visibility: hidden;
-      border: 1px solid rgba(#fff, 0);
-      bottom: 0px;
-      content: ' ';
-      display: block;
-      margin: 0 auto;
-      position: relative;
-      transition: all 280ms ease-in-out;
-      width: 0;
-    }
-
-    &__link:hover:after,
-    &__link:hover:before {
-      backface-visibility: hidden;
-      border-color: #fff;
-      transition: width 350ms ease-in-out;
-      width: 70%;
-    }
-
-    &__link:hover:before {
-      bottom: auto;
-      top: 0;
-      width: 70%;
-    }
+   
 
     &__button {
       padding: 10px 10px 10px 5px;
       display: flex;
+      transition: ease 0.5s;
       align-items: center;
       justify-content: center;
 
