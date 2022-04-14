@@ -45,4 +45,4 @@ Project is:  _complete_ .
 Created by [@zmizgalski](https://zmizgalski.github.io/) - feel free to contact me!
 
 ## License
-This project is open source and available under the [... License](https://github.com/ZMizgalski/Library-Example-Angular/blob/master/LICENSE).
+This project is open source and available under the [... License](https://github.com/ZMizgalski/Coding_da_Vinci_FrontEnd/blob/main/LICENSE).
