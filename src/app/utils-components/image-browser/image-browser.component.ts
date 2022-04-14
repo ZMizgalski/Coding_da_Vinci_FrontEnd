@@ -1,31 +1,4 @@
 import { Subscription } from 'rxjs';
-<<<<<<< HEAD
-import {
-  trigger,
-  animate,
-  style,
-  transition,
-  animation,
-  useAnimation,
-  query,
-} from '@angular/animations';
-import { DataService } from 'src/app/services/data.service';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnInit,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import { ImageResponseModel } from 'src/app/models';
-
-const transformAnimation = animation([
-  style('*'),
-  animate('400ms ease', style({ transform: 'translateX({{translateX}})', visibility: 'visible' })),
-]);
-=======
 import { trigger, animate, style, transition, animation, useAnimation, query } from '@angular/animations';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Output, EventEmitter } from '@angular/core';
 import { ImageResponseModel } from 'src/app/models';
@@ -34,7 +7,6 @@ const transformAnimation = animation([
   style("*"),
   animate("{{animationTime}}ms ease", style({transform: "translateX({{translateX}})", visibility: 'visible'}))
 ])
->>>>>>> 79e413e943ac15f78b71968280cb15d50aea6519
 
 @Component({
   selector: 'app-image-browser',
@@ -86,13 +58,8 @@ export class ImageBrowserComponent {
   @Output()
   public indexChange: EventEmitter<number> = new EventEmitter<number>();
 
-<<<<<<< HEAD
-  @Output('animationStart')
-  public animationStart: EventEmitter<void> = new EventEmitter();
-=======
   @Output("animationStart")
   public animationStart: EventEmitter<number> = new EventEmitter<number>();
->>>>>>> 79e413e943ac15f78b71968280cb15d50aea6519
 
   @Input('index')
   public set indexInput(value: number) {
@@ -117,11 +84,6 @@ export class ImageBrowserComponent {
   public get currentIndex(): number {
     return this._currentIndex;
   }
-<<<<<<< HEAD
-
-  public onAnimationStart() {
-    this.animationStart.emit();
-=======
   
   constructor(private cd: ChangeDetectorRef) {
   }
@@ -134,7 +96,6 @@ export class ImageBrowserComponent {
   public movingLeftStart(){
     if(!this.movingLeft) return;
     this.animationStart.emit(1);
->>>>>>> 79e413e943ac15f78b71968280cb15d50aea6519
   }
 
   public movingLeftFinished() {
@@ -143,10 +104,6 @@ export class ImageBrowserComponent {
     this.currentIndex = this.getNearestIndex(1);
   }
 
-<<<<<<< HEAD
-  private setCurrentIndex(value: number, callEvent: boolean) {
-    if (value === this._currentIndex) return;
-=======
   public movingRightFinished(){
     if(!this.movingRight) return;
     this.movingRight = false;
@@ -155,7 +112,6 @@ export class ImageBrowserComponent {
 
   private setCurrentIndex(value: number, callEvent: boolean){
     if(value === this._currentIndex) return;
->>>>>>> 79e413e943ac15f78b71968280cb15d50aea6519
     this._currentIndex = value;
     this.loadNearestBlobs();
     this.recalcUrlsModels();
@@ -167,19 +123,7 @@ export class ImageBrowserComponent {
     console.log(this.urlsModels);
   }
 
-<<<<<<< HEAD
-  public movingRightFinished() {
-    if (!this.movingRight) return;
-    this.movingRight = false;
-    this.currentIndex = this.getNearestIndex(-1);
-  }
-
-  constructor(private cd: ChangeDetectorRef) {}
-
-  public recalcUrlsModels() {
-=======
   public recalcUrlsModels(){
->>>>>>> 79e413e943ac15f78b71968280cb15d50aea6519
     this.urlsModels[0] = this.loadedImages.get(this.getNearestIndex(-1))?.src;
     this.urlsModels[1] = this.loadedImages.get(this._currentIndex)?.src;
     this.urlsModels[2] = this.loadedImages.get(this.getNearestIndex(1))?.src;
@@ -234,17 +178,10 @@ export class ImageBrowserComponent {
     // this.currentIndex = this.getNearestIndex(-1);
   }
 
-<<<<<<< HEAD
-  public loadBlobToMap(index: number) {
-    if (this.loadedImages.has(index)) return;
-    if (this.data.length <= index) return;
-    console.log(index, this.data.length);
-=======
 
   public loadBlobToMap(index: number){
     if(this.loadedImages.has(index)) return;
     if(this.data.length <= index) return;
->>>>>>> 79e413e943ac15f78b71968280cb15d50aea6519
     let image = new Image();
     image.src = this.data[index].mainImage;
     this.loadedImages.set(index, image);

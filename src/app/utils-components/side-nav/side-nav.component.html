@@ -1,6 +1,7 @@
 <div
   class="side-nav-container"
   #sideNavContainer
+  [ngClass]="(isHeadset | async) ? 'side-nav-container-hadset' : 'side-nav-container'"
   *ngIf="this.expandNav"
   [@panelState]="{
   value: 'visible',
@@ -34,6 +35,8 @@
         <i *ngIf="item.rightIcon" class="item__right-icon pi" [ngClass]="item.rightIcon"></i>
       </a>
     </nav>
-    <img class="navigation__logo" src="../../../assets/images/Abstract Visioner_tr.png" />
+    <div class="navigation-logo-container">
+      <img class="logo" src="../../../assets/images/Abstract Visioner_tr.png" />
+    </div>
   </div>
 </div>

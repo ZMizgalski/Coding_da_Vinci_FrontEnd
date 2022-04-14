@@ -1,3 +1,4 @@
+import { Subject, Subscription } from 'rxjs';
 import { ResizeService } from '../../services/resize-handler/resize.service';
 import { EventEmitter, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Output } from '@angular/core';
@@ -9,6 +10,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { SizeEnum } from 'src/app/services/resize-handler/interfaces/size.enum';
 
 export interface NavItemModel {
   name: string;
@@ -42,6 +44,8 @@ const hideAnimation = animation([
 export class SideNavComponent implements OnInit, OnDestroy {
   private localNavExpanded = true;
   public itemsList: NavItemModel[] = [];
+  public isHeadset: Subject<boolean> = new Subject();
+  private subscriptions: Subscription[] = [];
   @Output() onShow: EventEmitter<any> = new EventEmitter();
   @Output() onHide: EventEmitter<any> = new EventEmitter();
   @Output() expandNavChange: EventEmitter<any> = new EventEmitter();
@@ -110,7 +114,17 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.expandNav = false;
+    this.subscriptions.forEach(item => item.unsubscribe());
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscriptions.push( 
+      this.resizeService.modeChanges.subscribe(item => {
+        if (item <= SizeEnum.SMALL) {
+          this.isHeadset.next(true);
+        } else {
+          this.isHeadset.next(false);  
+        }
+    }));
+  }
 }

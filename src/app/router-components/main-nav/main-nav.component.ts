@@ -39,10 +39,6 @@ export class MainNavComponent implements OnInit, OnDestroy {
       name: 'Mixer',
       routerLink: 'mixer',
     },
-    {
-      name: 'About',
-      routerLink: 'about',
-    },
   ];
 
   ngOnDestroy(): void {

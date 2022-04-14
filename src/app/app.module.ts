@@ -8,7 +8,6 @@ import { MainNavComponent } from './router-components/main-nav/main-nav.componen
 import { SideNavComponent } from './utils-components/side-nav/side-nav.component';
 import { HomeComponent } from './router-components/home/home.component';
 import { CollectionComponent } from './router-components/collection/collection.component';
-import { AboutComponent } from './router-components/about/about.component';
 import { MixerComponent } from './router-components/mixer/mixer.component';
 import { NotFoundComponent } from './router-components/not-found/not-found.component';
 import { ImageBrowserComponent } from './utils-components/image-browser/image-browser.component';
@@ -26,7 +25,6 @@ import { ImageComponent } from './utils-components/image/image.component';
     SideNavComponent,
     HomeComponent,
     CollectionComponent,
-    AboutComponent,
     MixerComponent,
     NotFoundComponent,
     ImageBrowserComponent,

@@ -1,5 +1,4 @@
 import { Directive, ElementRef, Input } from '@angular/core';
-import { disconnect } from 'process';
 
 @Directive({
   selector: '[appImage]',

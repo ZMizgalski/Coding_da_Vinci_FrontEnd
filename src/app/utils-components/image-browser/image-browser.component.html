@@ -7,17 +7,6 @@
       (click)="this.previousImageClicked()"
     ></a>
   </div>
-<<<<<<< HEAD
-  <div
-    class="image"
-    [@moveLeft]="this.movingLeft ? 'moved' : 'normal'"
-    [@moveRight]="this.movingRight ? 'moved' : 'normal'"
-    (@moveLeft.done)="this.movingLeftFinished()"
-    (@moveRight.done)="this.movingRightFinished()"
-    (@moveRight.start)="this.onAnimationStart()"
-    (@moveLeft.start)="this.onAnimationStart()"
-  >
-=======
   <div class="image" [@moveLeft]="{value: this.movingLeft ? 'moved' : 'normal', params:{
     animationTime: this.animationTime
   }}"
@@ -28,7 +17,6 @@
   (@moveRight.done) = "this.movingRightFinished()"
   (@moveRight.start) = "this.movingRightStart()"
   (@moveLeft.start) = "this.movingLeftStart()">
->>>>>>> 79e413e943ac15f78b71968280cb15d50aea6519
     <div class="image__wrapper image__wrapper-side image__wrapper-side-left image-right-animation">
       <app-image
         class="image__img"

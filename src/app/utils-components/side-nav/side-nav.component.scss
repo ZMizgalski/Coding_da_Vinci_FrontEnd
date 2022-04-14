@@ -4,6 +4,10 @@
   z-index: 99999999;
 }
 
+.side-nav-container-hadset {
+  width: 100% !important;
+}
+
 .side-nav-container {
   position: fixed;
   display: flex;
@@ -12,7 +16,7 @@
   background-color: $surface-1;
   top: 0;
   left: 0;
-  width: 200px !important;
+  width: 200px;
   height: 100vh;
   flex-direction: column;
 }
@@ -52,9 +56,19 @@
     align-items: center;
   }
 
-  &__logo {
+  &-logo-container {
     width: 100%;
+    display: flex;
+    align-items: center;
     margin-top: auto;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+
+    .logo {
+      padding: 10px;
+      max-width: 100px;
+    }
   }
 
   &__item {

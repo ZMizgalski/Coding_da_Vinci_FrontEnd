@@ -1,6 +1,5 @@
 import { DetailsComponent } from './router-components/details/details.component';
 import { NotFoundComponent } from './router-components/not-found/not-found.component';
-import { AboutComponent } from './router-components/about/about.component';
 import { MixerComponent } from './router-components/mixer/mixer.component';
 import { CollectionComponent } from './router-components/collection/collection.component';
 import { HomeComponent } from './router-components/home/home.component';
@@ -11,7 +10,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'collection', component: CollectionComponent },
   { path: 'mixer', component: MixerComponent },
-  { path: 'about', component: AboutComponent },
   { path: 'details/:id', component: DetailsComponent},
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: NotFoundComponent },
