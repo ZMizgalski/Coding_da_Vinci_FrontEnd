@@ -44,49 +44,12 @@
     flex-direction: column;
     margin-top: auto;
     min-height: calc(100vh - 50px);
+    padding-bottom: 10px;
 
-    &__button {
-      margin-top: auto !important;
-      margin: 10px;
-      width: 150px;
-      height: 50px;
-      padding: 10px 25px;
-      border: 2px solid white;
-      font-family: 'Lato', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      color: white;
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      display: inline-block;
-      z-index: 9;
-    }
+    @include styled-button("&__button");
 
-    &__button:after {
-      position: absolute;
-      content: '';
-      width: 100%;
-      height: 0;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-      background: #e0e5ec;
-      transition: all 0.3s ease;
-    }
-
-    &__button:hover {
-      color: #000;
-    }
-
-    &__button:hover:after {
-      top: 0;
-      height: 100%;
-    }
-
-    &__button:active {
-      top: 2px;
+    &__button{
+     margin-top: auto; 
     }
 
     .content-item {
@@ -95,16 +58,47 @@
       align-items: center;
       flex-direction: column;
       padding: 10px;
+      margin-bottom: 10px;
+      position: relative;
+
+      &:hover .content-item-overlay {
+        display: flex;
+      }
 
       &__img {
         width: 100%;
       }
 
       .content-item-overlay {
-        display: flex;
-        justify-content: center;
+        display: none;
+        // justify-content: space-evenly;
+        flex-direction: column;
         align-items: center;
         position: absolute;
+
+        @include styled-button("&__button");
+
+        &__button{
+          @include styled-button("&-details");
+          @include styled-button("&-delete", black, rgb(186, 23, 23));
+
+          &-delete,
+          &-details{
+            width: 100px;
+            height: 30px;
+            padding: 5px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+          }
+
+          &:first-child{
+            margin-top: 0 !important;
+          }
+        }
 
         .overlay__p {
           margin: 0;

@@ -1,3 +1,4 @@
+import { Subscription, map } from 'rxjs';
 import { MixerService } from './../../services/mixer-service/mixer-service.service';
 import { MixerCart } from './../../services/mixer-service/interfaces/mixer-cart.interface';
 import { trigger, transition, useAnimation, animate, animation, style } from '@angular/animations';
@@ -10,6 +11,7 @@ import {
   OnDestroy,
   Input,
   OnInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 
 const showAnimation = animation([
@@ -41,13 +43,17 @@ const hideAnimation = animation([
       <i class="pi pi-times" (click)="close($event)" (keydown.enter)="close($event)"></i>
     </span>
     <div class="cart-container-content">
-      <div class="content-item" *ngFor="let item of cartItems; let i = index">
-        <img class="content-item__img" [src]="item.img" />
+      <div class="content-item" *ngFor="let item of cartItems; let i = index; trackBy: this.trackByName">
+        <img class="content-item__img" [src]="item.iconImage" />
         <div class="content-item-overlay">
-          <p class="overlay__p">{{ item.name }}</p>
+          <!-- <p class="overlay__p">{{ item.name }}</p> -->
+          <a class="content-item-overlay__button content-item-overlay__button-details" [routerLink]="'/details/' + item.index">
+            Details</a>
+          <button class="content-item-overlay__button content-item-overlay__button-delete" (click)="this.deleteItem(item)">
+            Delete</button>
         </div>
       </div>
-      <button class="cart-container-content__button">Combine</button>
+      <button class="cart-container-content__button" [disabled]="!this.mixerService.dataMax">Combine</button>
     </div>
   </div>`,
   styleUrls: ['./mixer-cart.component.scss'],
@@ -58,7 +64,7 @@ const hideAnimation = animation([
     ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
 })
 export class MixerCartComponent implements OnDestroy, OnInit {
   @Output() onShow: EventEmitter<any> = new EventEmitter();
@@ -66,6 +72,7 @@ export class MixerCartComponent implements OnDestroy, OnInit {
   @Output() visibleChange: EventEmitter<any> = new EventEmitter();
   private localVisible = false;
   public cartItems: MixerCart[] = [];
+  private subscriptions: Subscription[] = [];
 
   @Input() get visible(): boolean {
     return this.localVisible;
@@ -75,14 +82,21 @@ export class MixerCartComponent implements OnDestroy, OnInit {
     this.localVisible = value;
   }
 
-  constructor(private mixerService: MixerService) {}
+  constructor(public mixerService: MixerService, private cd: ChangeDetectorRef) {}
 
   ngOnDestroy(): void {
     this.visible = false;
+    this.subscriptions.forEach(sub=>sub.unsubscribe());
   }
 
   ngOnInit(): void {
-    this.cartItems = this.mixerService.getCartItems;
+    // this.cartItems = this.mixerService.data;
+    this.subscriptions.push(
+      this.mixerService.dataChange.subscribe(cartItems=>{
+        this.cartItems = cartItems;
+        this.cd.markForCheck();
+      })
+    );
   }
 
   private show(): void {
@@ -116,5 +130,13 @@ export class MixerCartComponent implements OnDestroy, OnInit {
         this.hide();
         break;
     }
+  }
+
+  public deleteItem(item: MixerCart){
+    this.mixerService.deleteItemFromMixer(item.name);
+  }
+
+  public trackByName(index: number, item: MixerCart){
+    return item.name;
   }
 }

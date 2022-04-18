@@ -51,45 +51,5 @@
     font-weight: 600;
   }
 
-  &__button {
-    width: 150px;
-    height: 50px;
-    padding: 10px 25px;
-    border: 2px solid white;
-    font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: white;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    z-index: 9;
-  }
-
-  &__button:after {
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    background: #e0e5ec;
-    transition: all 0.3s ease;
-  }
-
-  &__button:hover {
-    color: #000;
-  }
-
-  &__button:hover:after {
-    top: 0;
-    height: 100%;
-  }
-
-  &__button:active {
-    top: 2px;
-  }
+  @include styled-button("&__button");
 }

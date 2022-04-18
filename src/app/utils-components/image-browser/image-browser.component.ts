@@ -61,6 +61,9 @@ export class ImageBrowserComponent {
   private readonly LOADING_MARGIN = 2;
 
   @Input() animationTime: number = 400;
+  @Input() cornerIcon: boolean = false;
+  @Input() cornerIconClass: string = "pi-plus";
+  @Output() cornerIconClick: EventEmitter<void> = new EventEmitter();
 
   private subscriptions: Subscription[] = [];
   public data: ImageResponseModel[] = [];
@@ -133,9 +136,6 @@ export class ImageBrowserComponent {
     this.removeOldImages();
     if (callEvent) this.indexChange.emit(value);
     this.cd.markForCheck();
-    console.log(this.data);
-    console.log(this.loadedImages);
-    console.log(this.urlsModels);
   }
 
   public recalcUrlsModels() {

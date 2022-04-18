@@ -1,3 +1,4 @@
+import { MixerService } from './../../services/mixer-service/mixer-service.service';
 import { trigger, transition, query, style, animate, keyframes } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { ImageResponseModel } from 'src/app/models';
@@ -44,12 +45,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
   public currentIndex: number = 0;
   public data: ImageResponseModel[] = [];
   public readonly animationTime = 400;
+  public showCornerIcon: boolean = true;
 
   constructor(
     private dataService: DataService,
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private mixerService: MixerService
   ) {}
 
   public animationCounter: number = 0;
@@ -74,6 +77,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
         }
         this.currentIndex = param;
         this.displayIndex = param;
+        if(this.data.length > 0) this.refreshCornerIcon(this.data[this.currentIndex].mainTitle);
+        this.cd.markForCheck();
+      }),
+      this.mixerService.dataChange.subscribe(value=>{
+        if(this.data.length > 0)
+          this.refreshCornerIcon(this.data[this.currentIndex].mainTitle);
+        else
+          this.showCornerIcon = !this.mixerService.dataMax;
         this.cd.markForCheck();
       })
     );
@@ -81,6 +92,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   public onIndexChange(value: number) {
     this.router.navigate([`details/${value}`]);
+    this.refreshCornerIcon(this.data[value].mainTitle);
+    this.cd.markForCheck();
+  }
+
+  public refreshCornerIcon(imageName: string){
+    this.showCornerIcon = !this.mixerService.isInMixer(imageName) && !this.mixerService.dataMax;
+    this.cd.markForCheck();
+  }
+
+  public addItemToMixer(){
+    this.mixerService.addImageToMixer({
+      index: this.currentIndex,
+      originalImage: this.data[this.currentIndex].mainImage,
+      iconImage: this.data[this.currentIndex].smallImage,
+      name: this.data[this.currentIndex].mainTitle
+    })
   }
 
   public navigateToNotFound() {
@@ -101,6 +128,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.cd.markForCheck();
     }, this.animationTime / 2);
   }
+
+  
 
   public onAnimationFinished() {}
 }

@@ -1,4 +1,6 @@
 export interface MixerCart {
-  img: string;
+  originalImage: string;
   name: string;
+  iconImage: string;
+  index: number;
 }

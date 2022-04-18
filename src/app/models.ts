@@ -14,6 +14,7 @@ export interface ImageResponseModel {
     }
   ];
   mainImage: string;
+  smallImage: string;
   objectTitle: string;
   description: string;
   mainTechnique_title: string;

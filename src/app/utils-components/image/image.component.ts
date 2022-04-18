@@ -1,12 +1,19 @@
-import { Component, Input, OnInit, ChangeDetectorRef, Output } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-image',
   template: `
+  <div class="image-wrapper">
     <img class="image" [src]="this.currentSrc" />
-    <div *ngIf="this.isLoading" class="overlay">
-      <i class="pi pi-spinner pi-spin"></i>
+    <div class="image-overlay" *ngIf="this.cornerIcon">
+      <button class="image-overlay__button" (click)="this.cornerIconClick.emit()">
+        <i [class]="'pi ' + this.cornerIconClass"></i>
+      </button>
     </div>
+  </div>
+  <div *ngIf="this.isLoading" class="overlay">
+    <i class="pi pi-spinner pi-spin"></i>
+  </div>
   `,
   styleUrls: ['./image.component.scss'],
 })
@@ -15,6 +22,10 @@ export class ImageComponent implements OnInit {
   public altImageSrc: string = '';
   public internalImage: HTMLImageElement = new Image();
   public isLoading: boolean = false;
+  
+  @Output() cornerIconClick: EventEmitter<void> = new EventEmitter();
+  @Input() cornerIconClass: string = "pi-plus";
+  @Input() cornerIcon: boolean = false;
 
   @Input('altSrc')
   public set altImageInput(value: string) {

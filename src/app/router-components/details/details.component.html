@@ -6,7 +6,7 @@
 }}"
   (@switchContent.done)="this.onAnimationFinished()"
 >
-  <h2 class="main-container__header">{{this.data[this.displayIndex].mainTitle}}</h2>
+  <h2 class="main-container__header content">{{this.data[this.displayIndex].mainTitle}}</h2>
   <div class="image-container">
     <app-image-browser
       class="image-container__image-browser"
@@ -15,9 +15,11 @@
       [images]="this.data"
       (animationStart)="this.startAnimation($event)"
       [animationTime]="this.animationTime"
+      [cornerIcon]="this.showCornerIcon"
+      (cornerIconClick)="this.addItemToMixer()"
     ></app-image-browser>
   </div>
-  <div class="data-container">
+  <div class="data-container content">
     <p class="data-container__p">{{this.data[this.displayIndex].description}}</p>
   </div>
 </div>
