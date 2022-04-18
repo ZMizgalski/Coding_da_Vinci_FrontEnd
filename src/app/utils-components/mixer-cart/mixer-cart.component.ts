@@ -43,17 +43,30 @@ const hideAnimation = animation([
       <i class="pi pi-times" (click)="close($event)" (keydown.enter)="close($event)"></i>
     </span>
     <div class="cart-container-content">
-      <div class="content-item" *ngFor="let item of cartItems; let i = index; trackBy: this.trackByName">
+      <div
+        class="content-item"
+        *ngFor="let item of cartItems; let i = index; trackBy: this.trackByName"
+      >
         <img class="content-item__img" [src]="item.iconImage" />
         <div class="content-item-overlay">
-          <!-- <p class="overlay__p">{{ item.name }}</p> -->
-          <a class="content-item-overlay__button content-item-overlay__button-details" [routerLink]="'/details/' + item.index">
-            Details</a>
-          <button class="content-item-overlay__button content-item-overlay__button-delete" (click)="this.deleteItem(item)">
-            Delete</button>
+          <a
+            class="content-item-overlay__button content-item-overlay__button-details"
+            [routerLink]="'/details/' + item.index"
+          >
+            Details</a
+          >
+          <button class="image-overlay__button" (click)="this.deleteItem(item)">
+            <i class="pi pi-times"></i>
+          </button>
         </div>
       </div>
-      <button class="cart-container-content__button" [disabled]="!this.mixerService.dataMax">Combine</button>
+      <button
+        class="cart-container-content__button"
+        [ngClass]="{ 'cart-container-content__button--disabled': !this.mixerService.dataMax }"
+        [disabled]="!this.mixerService.dataMax"
+      >
+        Combine
+      </button>
     </div>
   </div>`,
   styleUrls: ['./mixer-cart.component.scss'],
@@ -86,13 +99,13 @@ export class MixerCartComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.visible = false;
-    this.subscriptions.forEach(sub=>sub.unsubscribe());
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   ngOnInit(): void {
     // this.cartItems = this.mixerService.data;
     this.subscriptions.push(
-      this.mixerService.dataChange.subscribe(cartItems=>{
+      this.mixerService.dataChange.subscribe(cartItems => {
         this.cartItems = cartItems;
         this.cd.markForCheck();
       })
@@ -132,11 +145,11 @@ export class MixerCartComponent implements OnDestroy, OnInit {
     }
   }
 
-  public deleteItem(item: MixerCart){
+  public deleteItem(item: MixerCart) {
     this.mixerService.deleteItemFromMixer(item.name);
   }
 
-  public trackByName(index: number, item: MixerCart){
+  public trackByName(index: number, item: MixerCart) {
     return item.name;
   }
 }

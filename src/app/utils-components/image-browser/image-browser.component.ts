@@ -62,7 +62,7 @@ export class ImageBrowserComponent {
 
   @Input() animationTime: number = 400;
   @Input() cornerIcon: boolean = false;
-  @Input() cornerIconClass: string = "pi-plus";
+  @Input() cornerIconClass: string = 'pi-plus';
   @Output() cornerIconClick: EventEmitter<void> = new EventEmitter();
 
   private subscriptions: Subscription[] = [];

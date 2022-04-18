@@ -48,8 +48,14 @@
 
     @include styled-button("&__button");
 
-    &__button{
-     margin-top: auto; 
+
+    &__button--disabled {
+      color: rgba($color: rgb(158, 158, 158), $alpha: 0.8);
+      border-color: rgba($color: rgb(158, 158, 158), $alpha: 0.8);
+    }
+
+    &__button {
+      margin-top: auto;
     }
 
     .content-item {
@@ -71,19 +77,49 @@
 
       .content-item-overlay {
         display: none;
-        // justify-content: space-evenly;
         flex-direction: column;
         align-items: center;
         position: absolute;
+        height: 100%;
+        width: 100%;
+
+        .image-overlay__button:hover {
+          background-color: rgba($color: red, $alpha: 0.3);
+        }
+
+        .image-overlay__button {
+          transition: 0.2s ease;
+          cursor: pointer;
+          outline: none;
+          border: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          background-color: #434343;
+          box-shadow: 0 0 2px 0px black;
+          border-radius: 100%;
+          color: white;
+          align-items: center;
+          height: 30px;
+          width: 30px;
+          overflow: hidden;
+          justify-content: center;
+          position: absolute;
+          top: 15px;
+          right: 15px;
+
+          & .pi {
+            font-size: 15px;
+          }
+        }
 
         @include styled-button("&__button");
 
-        &__button{
+        &__button {
           @include styled-button("&-details");
-          @include styled-button("&-delete", black, rgb(186, 23, 23));
 
-          &-delete,
-          &-details{
+          &-details {
             width: 100px;
             height: 30px;
             padding: 5px;
@@ -95,8 +131,8 @@
             margin-top: 15px;
           }
 
-          &:first-child{
-            margin-top: 0 !important;
+          &:first-child {
+            margin: auto;
           }
         }
 
