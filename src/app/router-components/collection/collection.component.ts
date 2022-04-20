@@ -18,12 +18,9 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ],
 })
 export class CollectionComponent implements OnInit {
-  public readonly NORMAL: number = 0;
-  public readonly PANORAMIC: number = 1;
-  public readonly ULTRA_PANORAMIC: number = 2;
+
   public loaded: Subject<boolean> = new Subject();
   private localItems: ImageResponseModelWithAnimation[] = [];
-  public imagesModes: number[] = [];
 
   public set items(data: ImageResponseModelWithAnimation[]) {
     this.localItems = data;
@@ -40,7 +37,7 @@ export class CollectionComponent implements OnInit {
   }
 
   private mapAllItemsForAnmiation(data: ImageResponseModel[]): ImageResponseModelWithAnimation[] {
-    return data.map(item => ({ item: item, state: 'initial' }));
+    return data.map(item => ({ item: item, state: 'initial', sizeRatio: 0}));
   }
 
   ngOnInit(): void {
@@ -50,13 +47,8 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  public calcIsPanoramic(image: HTMLImageElement, index: number): void {
-    this.imagesModes[index] =
-      image.naturalWidth / image.naturalHeight >= 3
-        ? this.ULTRA_PANORAMIC
-        : image.naturalWidth / image.naturalHeight >= 2
-        ? this.PANORAMIC
-        : this.NORMAL;
+  public calcSizeRatio(image: HTMLImageElement, index: number): void {
+    this.localItems[index].sizeRatio = Math.max(1,Math.floor(image.naturalWidth / image.naturalHeight));
   }
 
   public trackByTitle(index: number, item: ImageResponseModelWithAnimation): string {

@@ -4,17 +4,18 @@
     (click)="makeRoute(i)"
     *ngFor="let item of items; let i = index; trackBy: this.trackByTitle"
     [@ease]="item.state"
-    [ngClass]="{'model--standard': this.imagesModes[i]===this.NORMAL,
-   'model--panoramic': this.imagesModes[i]===this.PANORAMIC,
-    'model--ultra-panoramic': this.imagesModes[i]===this.ULTRA_PANORAMIC}"
+    [ngClass]="{'model--standard': item.sizeRatio === 1,
+   'model--panoramic': item.sizeRatio === 2,
+    'model--ultra-panoramic': item.sizeRatio >= 3}"
   >
     <img
       #image
-      (load)="this.calcIsPanoramic(image, i)"
+      (load)="this.calcSizeRatio(image, i)"
       class="model__image"
       loading="lazy"
       [src]="item.item.mainImage"
     />
+    <div class="model__shadow"></div>
     <p class="model__title">
       "{{item.item.mainTitle}}"
       <span class="model__date">{{this.getCreateDate(item)}}</span>

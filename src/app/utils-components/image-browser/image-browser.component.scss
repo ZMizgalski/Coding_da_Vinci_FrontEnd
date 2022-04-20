@@ -38,6 +38,25 @@ a {
   }
 }
 
+.bottom {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .pi {
+    font-size: 300%;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: min(50px, 10%);
+
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}
+
 .image {
   height: 100%;
   position: relative;
@@ -69,5 +88,19 @@ a {
 
   &-hidden {
     display: none
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .container{
+    flex-direction: column;
+  }
+
+  .bottom{
+    display: flex;
+  }
+
+  .sidebar{
+    display: none;
   }
 }

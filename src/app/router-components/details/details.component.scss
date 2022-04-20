@@ -38,7 +38,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      height: calc(95vh - 120px);
+      height: max(600px, calc(95vh - 120px));
     }
   }
 

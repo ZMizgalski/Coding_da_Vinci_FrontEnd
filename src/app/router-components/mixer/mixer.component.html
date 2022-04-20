@@ -1,17 +1,20 @@
 <div class="main-container">
   <div class="img-container">
-    <img
-      src="../../../assets/images/home-image2.jpg"
+    <img *ngIf="this.imageUrl"
+      [src]="this.imageUrl"
       [ngClass]="
       (size | async ) == 0? 'img-container-tiny': 
       (size | async) == 1? 'img-container-small': 
       (size | async) == 2? 'img-container-medium': 'img-container-large'"
       class="img"
     />
+    <div class="main-container__icon"*ngIf="!this.imageUrl">
+      <a href="../collection" class="pi pi-image"></a>
+    </div>
   </div>
   <div class="actions-container">
-    <button class="action-button">Mix</button>
-    <button class="action-button">Make public</button>
+    <a class="action-button" routerLink="../collection" *ngIf="!this.imageUrl">Collection</a>
+    <button class="action-button" *ngIf="this.imageUrl" (click)="this.makePublicClicked()">Make Public</button>
     <button class="action-button">Download</button>
   </div>
 </div>

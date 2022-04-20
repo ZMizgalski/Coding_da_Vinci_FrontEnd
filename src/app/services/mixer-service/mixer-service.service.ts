@@ -7,13 +7,31 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class MixerService {
 
   public readonly MAX_DATA_SIZE: number = 2;
-  private dataSubject: BehaviorSubject<MixerCart[]> = new BehaviorSubject<MixerCart[]>([
-    // { originalImage: '../../../assets/images/collection/01163900454.jpg', name: '1',
-    //  iconImage: '../../../assets/images/collection/01163900454.jpg', index: 1},
-    // { originalImage: '../../../assets/images/collection/01163900454.jpg', name: '2', 
-    //   iconImage: '../../../assets/images/collection/01163900454.jpg', index: 1 },
-    // // { img: '../../../assets/images/collection/01163900454.jpg', name: '3' },
-  ])
+  public readonly LOCAL_STORAGE_PATH: string = "mixerCart";
+  
+  private dataSubject: BehaviorSubject<MixerCart[]> = new BehaviorSubject<MixerCart[]>([])
+
+  constructor(){
+    this.readFromLocalStorage();
+    this.dataChange.subscribe(value=>{
+      this.writeToLocalStorage(value);
+    });
+  }
+
+  public readFromLocalStorage(){
+    let raw = localStorage.getItem(this.LOCAL_STORAGE_PATH);
+    if(!raw) return;
+    try{
+      let parsedData =  JSON.parse(raw);
+      if(!Array.isArray(parsedData)) return;
+      this.dataSubject.next(parsedData);
+    }
+    catch(e){}
+  }
+
+  public writeToLocalStorage(value: MixerCart[] = this.data){
+    localStorage.setItem(this.LOCAL_STORAGE_PATH, JSON.stringify(value));
+  }
 
   public get dataChange(): Observable<MixerCart[]>{
     return this.dataSubject;
@@ -36,6 +54,10 @@ export class MixerService {
     this.dataSubject.next(this.data.filter(item=>item.name!==name));
   }
 
+  public clearCart(): void{
+    this.dataSubject.next([]);
+  }
+
   public get dataMax():boolean{
     return this.data.length >= this.MAX_DATA_SIZE;
   }
@@ -43,4 +65,5 @@ export class MixerService {
   public isInMixer(name: string): boolean{
     return this.data.some(item=>item.name === name);
   }
+  
 }

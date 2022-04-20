@@ -15,6 +15,12 @@
     align-items: center;
 
 
+    &__icon{
+      & .pi{
+        font-size: min(300px, 70vw);
+      }
+    }
+
     .img-container-tiny {
         max-height: 500px;
         width: 80vw;
@@ -36,8 +42,6 @@
 
     .img-container {
         display: flex;
-
-        background: $surface-2;
         justify-content: center;
         align-items: center;
         border: none;
@@ -72,8 +76,10 @@
 
         .action-button {
             margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
     }
-
 }

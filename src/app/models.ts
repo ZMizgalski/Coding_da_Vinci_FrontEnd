@@ -3,6 +3,7 @@ export const API_URL = 'http://127.0.0.1:8080';
 export interface ImageResponseModelWithAnimation {
   item: ImageResponseModel;
   state: string;
+  sizeRatio: number;
 }
 
 export interface ImageResponseModel {
