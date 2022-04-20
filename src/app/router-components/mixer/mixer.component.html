@@ -14,7 +14,6 @@
   </div>
   <div class="actions-container">
     <a class="action-button" routerLink="../collection" *ngIf="!this.imageUrl">Collection</a>
-    <button class="action-button" *ngIf="this.imageUrl" (click)="this.makePublicClicked()">Make Public</button>
-    <button class="action-button">Download</button>
+    <a class="action-button" *ngIf="this.imageUrl" [href]="this.imageUrl" download="mixedFile">Download</a>
   </div>
 </div>
