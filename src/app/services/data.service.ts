@@ -10,15 +10,15 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class DataService {
   private readonly URL = `${API_URL}`;
-  private _lastMixedImage: BehaviorSubject<Blob | undefined> = new BehaviorSubject<Blob | undefined>(undefined);
+  private _lastMixedImage: BehaviorSubject<Blob | undefined> = new BehaviorSubject<
+    Blob | undefined
+  >(undefined);
 
-  public get mixedImageChange(): Observable<Blob>{
-    return this._lastMixedImage.pipe(
-      filter(blob=>blob!=undefined)
-    ) as Observable<Blob>;
+  public get mixedImageChange(): Observable<Blob> {
+    return this._lastMixedImage.pipe(filter(blob => blob != undefined)) as Observable<Blob>;
   }
 
-  public get lastMixedImage(): Blob | undefined{
+  public get lastMixedImage(): Blob | undefined {
     return this._lastMixedImage.getValue();
   }
 
@@ -37,19 +37,19 @@ export class DataService {
     );
   }
 
-  public uploadFiles(urls: string[]): Observable<Blob>{
+  public uploadFiles(urls: string[]): Observable<Blob> {
     let data = new FormData();
-    data.append("firstImage", urls[0]);
-    data.append("secondImage", urls[1]);
-    return this.http.post(`${this.URL}/renderImage`, data, {responseType: 'blob'}).pipe(
-      tap(blob=>this._lastMixedImage.next(blob)),
-    );
+    data.append('firstImage', urls[0]);
+    data.append('secondImage', urls[1]);
+    return this.http
+      .post(`${this.URL}/renderImage`, data, { responseType: 'blob' })
+      .pipe(tap(blob => this._lastMixedImage.next(blob)));
   }
 
-  public shareFile(): Observable<unknown>{
-    if(!this.lastMixedImage) throw throwError(()=> new Error("No image to share"));
+  public shareFile(): Observable<unknown> {
+    if (!this.lastMixedImage) throw throwError(() => new Error('No image to share'));
     let formData = new FormData();
-    formData.set("file", this.lastMixedImage)
-    return this.http.post(`${this.URL}/makePublic`, formData, {responseType: 'text'});
+    formData.set('file', this.lastMixedImage);
+    return this.http.post(`${this.URL}/makePublic`, formData, { responseType: 'text' });
   }
 }
