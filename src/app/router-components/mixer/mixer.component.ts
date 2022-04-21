@@ -45,8 +45,4 @@ export class MixerComponent implements OnInit, OnDestroy {
       })
     );
   }
-
-  public makePublicClicked() {
-    this.dataService.shareFile().subscribe();
-  }
 }

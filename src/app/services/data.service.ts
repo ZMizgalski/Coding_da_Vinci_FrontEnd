@@ -39,17 +39,11 @@ export class DataService {
 
   public uploadFiles(urls: string[]): Observable<Blob> {
     let data = new FormData();
+    console.log(urls);
     data.append('firstImage', urls[0]);
     data.append('secondImage', urls[1]);
     return this.http
       .post(`${this.URL}/renderImage`, data, { responseType: 'blob' })
       .pipe(tap(blob => this._lastMixedImage.next(blob)));
-  }
-
-  public shareFile(): Observable<unknown> {
-    if (!this.lastMixedImage) throw throwError(() => new Error('No image to share'));
-    let formData = new FormData();
-    formData.set('file', this.lastMixedImage);
-    return this.http.post(`${this.URL}/makePublic`, formData, { responseType: 'text' });
   }
 }
