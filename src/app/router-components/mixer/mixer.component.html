@@ -1,6 +1,7 @@
 <div class="main-container">
   <div class="img-container">
-    <img *ngIf="this.imageUrl"
+    <img
+      *ngIf="this.imageUrl"
       [src]="this.imageUrl"
       [ngClass]="
       (size | async ) == 0? 'img-container-tiny': 
@@ -8,12 +9,14 @@
       (size | async) == 2? 'img-container-medium': 'img-container-large'"
       class="img"
     />
-    <div class="main-container__icon"*ngIf="!this.imageUrl">
+    <div class="main-container__icon" *ngIf="!this.imageUrl">
       <a href="../collection" class="pi pi-image"></a>
     </div>
   </div>
   <div class="actions-container">
     <a class="action-button" routerLink="../collection" *ngIf="!this.imageUrl">Collection</a>
-    <a class="action-button" *ngIf="this.imageUrl" [href]="this.imageUrl" download="mixedFile">Download</a>
+    <a class="action-button" *ngIf="this.imageUrl" [href]="this.imageUrl" download="MixedImage.jpg"
+      >Download</a
+    >
   </div>
 </div>
