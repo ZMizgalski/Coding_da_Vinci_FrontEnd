@@ -51,7 +51,7 @@ a {
     cursor: pointer;
     margin-left: min(50px, 10%);
 
-    &:first-child{
+    &:first-child {
       margin-left: 0;
     }
   }
@@ -92,15 +92,15 @@ a {
 }
 
 @media only screen and(max-width: 800px) {
-  .container{
+  .container {
     flex-direction: column;
   }
 
-  .bottom{
+  .bottom {
     display: flex;
   }
 
-  .sidebar{
+  .sidebar {
     display: none;
   }
 }

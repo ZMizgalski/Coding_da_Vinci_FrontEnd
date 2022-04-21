@@ -18,7 +18,6 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ],
 })
 export class CollectionComponent implements OnInit {
-
   public loaded: Subject<boolean> = new Subject();
   private localItems: ImageResponseModelWithAnimation[] = [];
 
@@ -37,7 +36,7 @@ export class CollectionComponent implements OnInit {
   }
 
   private mapAllItemsForAnmiation(data: ImageResponseModel[]): ImageResponseModelWithAnimation[] {
-    return data.map(item => ({ item: item, state: 'initial', sizeRatio: 0}));
+    return data.map(item => ({ item: item, state: 'initial', sizeRatio: 0 }));
   }
 
   ngOnInit(): void {
@@ -48,7 +47,10 @@ export class CollectionComponent implements OnInit {
   }
 
   public calcSizeRatio(image: HTMLImageElement, index: number): void {
-    this.localItems[index].sizeRatio = Math.max(1,Math.floor(image.naturalWidth / image.naturalHeight));
+    this.localItems[index].sizeRatio = Math.max(
+      1,
+      Math.floor(image.naturalWidth / image.naturalHeight)
+    );
   }
 
   public trackByTitle(index: number, item: ImageResponseModelWithAnimation): string {

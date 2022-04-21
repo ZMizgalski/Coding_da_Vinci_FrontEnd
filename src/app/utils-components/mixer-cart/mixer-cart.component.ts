@@ -66,12 +66,13 @@ const hideAnimation = animation([
             </button>
           </div>
         </div>
-    </ng-container>
+      </ng-container>
       <button
         class="cart-container-content__button"
         [ngClass]="{ 'cart-container-content__button--disabled': !this.mixerService.dataMax }"
         [disabled]="!this.mixerService.dataMax || this.waitingForResponse"
-      (click)="combineClicked()">
+        (click)="combineClicked()"
+      >
         Combine
       </button>
     </div>
@@ -103,8 +104,12 @@ export class MixerCartComponent implements OnDestroy, OnInit {
     this.localVisible = value;
   }
 
-  constructor(public mixerService: MixerService, private cd: ChangeDetectorRef, private dataService: DataService,
-    private router: Router) {}
+  constructor(
+    public mixerService: MixerService,
+    private cd: ChangeDetectorRef,
+    private dataService: DataService,
+    private router: Router
+  ) {}
 
   ngOnDestroy(): void {
     this.visible = false;
@@ -163,22 +168,21 @@ export class MixerCartComponent implements OnDestroy, OnInit {
     return item.name;
   }
 
-  public combineClicked(){
+  public combineClicked() {
     this.waitingForResponse = true;
     this.cd.markForCheck();
-    this.dataService.uploadFiles(this.mixerService.data.map(cart=>cart.originalImage)).subscribe({
-        next: ()=>{
-          this.mixerService.clearCart();
-          this.router.navigate(['mixer']);
-          this.hide();
-          this.waitingForResponse = false;
-          this.cd.markForCheck();
-        },
-        error:()=>{
-          this.waitingForResponse = false;
-          this.cd.markForCheck();
-        }
-      });
+    this.dataService.uploadFiles(this.mixerService.data.map(cart => cart.originalImage)).subscribe({
+      next: () => {
+        this.mixerService.clearCart();
+        this.router.navigate(['mixer']);
+        this.hide();
+        this.waitingForResponse = false;
+        this.cd.markForCheck();
+      },
+      error: () => {
+        this.waitingForResponse = false;
+        this.cd.markForCheck();
+      },
+    });
   }
-
 }

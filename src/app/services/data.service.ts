@@ -39,7 +39,6 @@ export class DataService {
 
   public uploadFiles(urls: string[]): Observable<Blob> {
     let data = new FormData();
-    console.log(urls);
     data.append('firstImage', urls[0]);
     data.append('secondImage', urls[1]);
     return this.http

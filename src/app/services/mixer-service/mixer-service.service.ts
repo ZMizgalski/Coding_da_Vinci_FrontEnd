@@ -5,35 +5,33 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class MixerService {
-
   public readonly MAX_DATA_SIZE: number = 2;
-  public readonly LOCAL_STORAGE_PATH: string = "mixerCart";
-  
-  private dataSubject: BehaviorSubject<MixerCart[]> = new BehaviorSubject<MixerCart[]>([])
+  public readonly LOCAL_STORAGE_PATH: string = 'mixerCart';
 
-  constructor(){
+  private dataSubject: BehaviorSubject<MixerCart[]> = new BehaviorSubject<MixerCart[]>([]);
+
+  constructor() {
     this.readFromLocalStorage();
-    this.dataChange.subscribe(value=>{
+    this.dataChange.subscribe(value => {
       this.writeToLocalStorage(value);
     });
   }
 
-  public readFromLocalStorage(){
+  public readFromLocalStorage() {
     let raw = localStorage.getItem(this.LOCAL_STORAGE_PATH);
-    if(!raw) return;
-    try{
-      let parsedData =  JSON.parse(raw);
-      if(!Array.isArray(parsedData)) return;
+    if (!raw) return;
+    try {
+      let parsedData = JSON.parse(raw);
+      if (!Array.isArray(parsedData)) return;
       this.dataSubject.next(parsedData);
-    }
-    catch(e){}
+    } catch (e) {}
   }
 
-  public writeToLocalStorage(value: MixerCart[] = this.data){
+  public writeToLocalStorage(value: MixerCart[] = this.data) {
     localStorage.setItem(this.LOCAL_STORAGE_PATH, JSON.stringify(value));
   }
 
-  public get dataChange(): Observable<MixerCart[]>{
+  public get dataChange(): Observable<MixerCart[]> {
     return this.dataSubject;
   }
 
@@ -51,19 +49,18 @@ export class MixerService {
   }
 
   public deleteItemFromMixer(name: string): void {
-    this.dataSubject.next(this.data.filter(item=>item.name!==name));
+    this.dataSubject.next(this.data.filter(item => item.name !== name));
   }
 
-  public clearCart(): void{
+  public clearCart(): void {
     this.dataSubject.next([]);
   }
 
-  public get dataMax():boolean{
+  public get dataMax(): boolean {
     return this.data.length >= this.MAX_DATA_SIZE;
   }
 
-  public isInMixer(name: string): boolean{
-    return this.data.some(item=>item.name === name);
+  public isInMixer(name: string): boolean {
+    return this.data.some(item => item.name === name);
   }
-  
 }

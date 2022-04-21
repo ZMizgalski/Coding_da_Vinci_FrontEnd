@@ -77,14 +77,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
         }
         this.currentIndex = param;
         this.displayIndex = param;
-        if(this.data.length > 0) this.refreshCornerIcon(this.data[this.currentIndex].mainTitle);
+        if (this.data.length > 0) this.refreshCornerIcon(this.data[this.currentIndex].mainTitle);
         this.cd.markForCheck();
       }),
-      this.mixerService.dataChange.subscribe(value=>{
-        if(this.data.length > 0)
-          this.refreshCornerIcon(this.data[this.currentIndex].mainTitle);
-        else
-          this.showCornerIcon = !this.mixerService.dataMax;
+      this.mixerService.dataChange.subscribe(value => {
+        if (this.data.length > 0) this.refreshCornerIcon(this.data[this.currentIndex].mainTitle);
+        else this.showCornerIcon = !this.mixerService.dataMax;
         this.cd.markForCheck();
       })
     );
@@ -96,18 +94,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
 
-  public refreshCornerIcon(imageName: string){
+  public refreshCornerIcon(imageName: string) {
     this.showCornerIcon = !this.mixerService.isInMixer(imageName) && !this.mixerService.dataMax;
     this.cd.markForCheck();
   }
 
-  public addItemToMixer(){
+  public addItemToMixer() {
     this.mixerService.addImageToMixer({
       index: this.currentIndex,
       originalImage: this.data[this.currentIndex].mainImage,
       iconImage: this.data[this.currentIndex].smallImage,
-      name: this.data[this.currentIndex].mainTitle
-    })
+      name: this.data[this.currentIndex].mainTitle,
+    });
   }
 
   public navigateToNotFound() {
@@ -128,8 +126,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.cd.markForCheck();
     }, this.animationTime / 2);
   }
-
-  
 
   public onAnimationFinished() {}
 }
