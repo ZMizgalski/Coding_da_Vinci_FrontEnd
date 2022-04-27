@@ -1,6 +1,9 @@
 # Coding_da_Vinci_FrontEnd
 > Coding_da_Vinci project website made with Angular
 
+## Youtube showcase:
+https://youtu.be/TElqo7OIwqQ
+
 ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
