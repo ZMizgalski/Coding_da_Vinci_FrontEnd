@@ -1,8 +1,6 @@
 # Coding_da_Vinci_FrontEnd
-> Coding_da_Vinci project website made with Angular
-
-## Youtube showcase:
-https://youtu.be/TElqo7OIwqQ
+> Coding_da_Vinci project website made with Angular  
+> Backend source code: https://github.com/ZMizgalski/Coding_da_Vinci_Backend
 
 ## Table of Contents
 * [General Info](#general-information)
